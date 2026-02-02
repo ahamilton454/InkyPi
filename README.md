@@ -1,4 +1,4 @@
-# InkyPi 
+# InkyPi Andrew
 
 <img src="./docs/images/inky_clock.jpg" />
 

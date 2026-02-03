@@ -1,4 +1,4 @@
-# InkyPi Detailed Installation
+# InkyPi Andrew Detailed Installation
 
 ## Flashing Raspberry Pi OS 
 

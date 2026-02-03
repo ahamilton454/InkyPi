@@ -156,8 +156,29 @@ For reference, see the Weather and AI Text plugins.
 2. It then calls the `take_screenshot_html` function in `image_utils.py`.
 3. This function uses the Chromium Browser in headless mode to load the HTML file and capture a screenshot.
 
+## Install and remove third-party plugins (CLI)
 
-## Publishing a third party plugin
+InkyPi includes a small command-line tool for managing third-party plugins.
+
+### Commands
+
+Install a plugin from a Git repository:
+
+```bash
+inkypi plugin install <plugin_id> <git_repository_url>
+```
+
+Uninstall a plugin:
+
+```bash
+inkypi plugin uninstall <plugin_id>
+```
+
+List installed plugins:
+
+```bash
+inkypi plugin list
+```
 
 To publish your plugin as a third party plugin for others to install, you'll need to create a new repository. See [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) in the GitHub documentation.
 

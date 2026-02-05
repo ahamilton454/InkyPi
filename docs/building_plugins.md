@@ -160,50 +160,5 @@ For reference, see the Weather and AI Text plugins.
 
 InkyPi includes a small command-line tool for managing third-party plugins.
 
-### Commands
-
-Install a plugin from a Git repository:
-
-```bash
-inkypi plugin install <plugin_id> <git_repository_url>
-```
-
-Uninstall a plugin:
-
-```bash
-inkypi plugin uninstall <plugin_id>
-```
-
-List installed plugins:
-
-```bash
-inkypi plugin list
-```
-
-To publish your plugin as a third party plugin for others to install, you'll need to create a new repository. See [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) in the GitHub documentation.
-
-Note: It’s recommended to name your repository `InkyPi-{plugin_name}` so it’s easy to discover via GitHub search.
-
-### Repository Structure
-
-Your repository must include:
-
-- **A folder named after your `plugin_id`**
-  - This folder will contain your plugin source code, see [example directory structure](./building_plugins.md#example-directory-structure) for the contents of the folder.
-  - When a user installs your plugin, this folder is copied into the `src/plugins/` directory.
-
-- **A README file** containing:
-  - A short, clear, one-sentence description of what the plugin does.
-  - At least one high-quality screenshot showing the plugin running.
-  - Any external APIs the plugin depends on, including:
-    - Links to the API documentation.
-    - Instructions for obtaining and configuring API keys, if required.
-    - Whether the API requires a key and any known usage limits or costs (for example, free tiers or rate limits).
-  - The current development status (for example: actively maintained, work in progress, looking for a maintainer, or no longer maintained).
-
----
-
-See [InkyPi-Plugin-Template](https://github.com/fatihak/InkyPi-Plugin-Template) for a sample template of a third party plugin.
-
-Once you're done, feel free to add your plugin to the [3rd Party Plugin List](https://github.com/fatihak/InkyPi/wiki/3rd-Party-Plugins) and share it in the [🙌 Show and Tell Discussion Board](https://github.com/fatihak/InkyPi/discussions/categories/show-and-tell).
+See [Plugin CLI (Third-party plugins)](./plugin-cli.md) for the command reference.
 

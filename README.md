@@ -25,6 +25,8 @@ InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. 
 
 And additional plugins coming soon! For documentation on building custom plugins, see [Building InkyPi Plugins](./docs/building_plugins.md).
 
+See [Plugin CLI (Third-party plugins)](./docs/plugin-cli.md) for instructions on installing and managing third-party plugins.
+
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
 ## Hardware 

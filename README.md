@@ -5,6 +5,7 @@
 
 ## About InkyPi 
 InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it allows you to effortlessly display the content you care about, with a simple web interface that makes setup and configuration effortless.
+InkyPi supports a range of E-Ink displays, including Inky, Waveshare, and the new Dingsaun Withitah displays.
 
 **Features**:
 - Natural paper-like aethetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight

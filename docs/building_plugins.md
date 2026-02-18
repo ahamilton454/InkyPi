@@ -186,3 +186,34 @@ See [InkyPi-Plugin-Template](https://github.com/fatihak/InkyPi-Plugin-Template) 
 
 Once you're done, feel free to add your plugin to the [3rd Party Plugin List](https://github.com/fatihak/InkyPi/wiki/3rd-Party-Plugins) and share it in the [🙌 Show and Tell Discussion Board](https://github.com/fatihak/InkyPi/discussions/categories/show-and-tell).
 
+## Installing a third-party plugin
+
+Third-party plugins can be installed from a git repository with the `inkypi` command.
+
+### Prerequisites
+
+- InkyPi is installed (the installation process places `inkypi` in `/usr/local/bin/inkypi`).
+- The plugin repository contains a top-level folder named after the `plugin_id`.
+
+### Install
+
+Install a plugin by providing the plugin id and the repository URL:
+
+```bash
+inkypi plugin install <plugin_id> <git_repository_url>
+```
+
+If the repository includes a `requirements.txt` file for the plugin, the command installs those Python dependencies into the InkyPi virtual environment.
+
+### Uninstall
+
+```bash
+inkypi plugin uninstall <plugin_id>
+```
+
+### List installed plugins
+
+```bash
+inkypi plugin list
+```
+

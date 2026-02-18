@@ -1,18 +1,20 @@
-# InkyPi 
+# InkyPi
 
 <img src="./docs/images/inky_clock.jpg" />
 
 
-## About InkyPi 
-InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it allows you to effortlessly display the content you care about, with a simple web interface that makes setup and configuration effortless.
+## About InkyPi
+
+InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. It displays selected content on an E-Ink screen and provides a web interface for setup and configuration.
 
 **Features**:
-- Natural paper-like aethetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight
-- Web Interface allows you to update and configure the display from any device on your network
-- Minimize distractions: no LEDS, noise, or notifications, just the content you care about
-- Easy installation and configuration, perfect for beginners and makers alike
-- Open source project allowing you to modify, customize, and create your own plugins
-- Set up scheduled playlists to display different plugins at designated times
+
+- Natural paper-like aesthetic: crisp, minimalist visuals with no glare or backlight
+- Web interface for updating and configuring the display from any device on the network
+- Distraction-minimizing output: no LEDs, noise, or notifications
+- Installation and configuration designed for beginners and makers
+- Open-source plugins that can be modified and extended
+- Scheduled playlists that display different plugins at designated times
 
 **Plugins**:
 
@@ -23,7 +25,7 @@ InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. 
 - Weather: Display current weather conditions and multi-day forecasts with a customizable layout
 - Calendar: Visualize your calendar from Google, Outlook, or Apple Calendar with customizable layouts
 
-And additional plugins coming soon! For documentation on building custom plugins, see [Building InkyPi Plugins](./docs/building_plugins.md).
+For documentation on building custom plugins, see [Building InkyPi Plugins](./docs/building_plugins.md).
 
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
@@ -49,7 +51,8 @@ See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-m
 **Disclosure:** The links above are affiliate links. I may earn a commission from qualifying purchases made through them, at no extra cost to you, which helps maintain and develop this project.
 
 ## Installation
-To install InkyPi, follow these steps:
+
+Install InkyPi as follows:
 
 1. Clone the repository:
     ```bash
@@ -59,11 +62,11 @@ To install InkyPi, follow these steps:
     ```bash
     cd InkyPi
     ```
-3. Run the installation script with sudo:
+3. Run the installation script with `sudo`:
     ```bash
     sudo bash install/install.sh [-W <waveshare device model>]
     ``` 
-     Option: 
+     Option:
     
     * -W \<waveshare device model\> - specify this parameter **ONLY** if installing for a Waveshare display.  After the -W option specify the Waveshare device model e.g. epd7in3f.
 
@@ -78,11 +81,12 @@ To install InkyPi, follow these steps:
     ```
 
 
-After the installation is complete, the script will prompt you to reboot your Raspberry Pi. Once rebooted, the display will update to show the InkyPi splash screen.
+After installation completes, the script prompts for a reboot. After reboot, the display updates to show the InkyPi splash screen.
 
-Note: 
-- The installation script requires sudo privileges to install and run the service. We recommend starting with a fresh installation of Raspberry Pi OS to avoid potential conflicts with existing software or configurations.
-- The installation process will automatically enable the required SPI and I2C interfaces on your Raspberry Pi.
+Note:
+
+- The installation script requires `sudo` privileges to install and run the service.
+- The installation process automatically enables the required SPI and I2C interfaces.
 
 For more details, including instructions on how to image your microSD with Raspberry Pi OS, refer to [installation.md](./docs/installation.md). You can also checkout [this YouTube tutorial](https://youtu.be/L5PvQj1vfC4).
 
@@ -102,8 +106,30 @@ To update your InkyPi with the latest code changes, follow these steps:
     ```
 This process ensures that any new updates, including code changes and additional dependencies, are properly applied without requiring a full reinstallation.
 
+## Third-party plugins (CLI)
+
+InkyPi installs an `inkypi` command to `/usr/local/bin/inkypi`. This command supports a plugin subcommand for managing third-party plugins from git repositories.
+
+List installed plugins:
+
+```bash
+inkypi plugin list
+```
+
+Install a third-party plugin from a git repository:
+
+```bash
+inkypi plugin install <plugin_id> <git_repository_url>
+```
+
+Remove an installed third-party plugin:
+
+```bash
+inkypi plugin uninstall <plugin_id>
+```
+
 ## Uninstall
-To install InkyPi, simply run the following command:
+Uninstall InkyPi as follows:
 
 ```bash
 sudo bash install/uninstall.sh

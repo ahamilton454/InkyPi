@@ -1,5 +1,34 @@
 # InkyPi Detailed Installation
 
+## Debian package requirements
+
+The installer relies on the following Debian packages (see [`install/debian-requirements.txt`](../install/debian-requirements.txt)):
+
+- `libtiff-dev`
+- `python3`
+- `python3-venv`
+- `python3-pip`
+- `avahi-daemon`
+- `libopenblas-dev`
+- `libopenjp2-7`
+- `chromium-headless-shell`
+- `libfreetype6-dev`
+- `fonts-noto-color-emoji`
+- `swig`
+- `liblgpio-dev`
+- `libheif-dev`
+- `jq`
+
+## Service management (systemd)
+
+InkyPi installs a systemd unit that starts the application with:
+
+```text
+/usr/local/bin/inkypi run
+```
+
+The unit file is located at [`install/inkypi.service`](../install/inkypi.service).
+
 ## Flashing Raspberry Pi OS 
 
 1. Install the Raspberry Pi Imager from the [official download page](https://www.raspberrypi.com/software/)

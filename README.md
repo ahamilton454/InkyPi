@@ -2,10 +2,15 @@
 
 <img src="./docs/images/inky_clock.jpg" />
 
-
 ## About InkyPi
 
 InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. It displays selected content on an E-Ink screen and provides a web interface for setup and configuration.
+
+## Documentation
+
+- Installation guide: [Detailed installation](./docs/installation.md)
+- Troubleshooting: [Troubleshooting](./docs/troubleshooting.md)
+- Plugin development: [Building InkyPi Plugins](./docs/building_plugins.md)
 
 **Features**:
 
@@ -24,8 +29,6 @@ InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. 
 - AI Image/Text: Generate images and dynamic text from prompts using OpenAI's models
 - Weather: Display current weather conditions and multi-day forecasts with a customizable layout
 - Calendar: Visualize your calendar from Google, Outlook, or Apple Calendar with customizable layouts
-
-For documentation on building custom plugins, see [Building InkyPi Plugins](./docs/building_plugins.md).
 
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
@@ -88,7 +91,7 @@ Note:
 - The installation script requires `sudo` privileges to install and run the service.
 - The installation process automatically enables the required SPI and I2C interfaces.
 
-For more details, including instructions on how to image your microSD with Raspberry Pi OS, refer to [installation.md](./docs/installation.md). You can also checkout [this YouTube tutorial](https://youtu.be/L5PvQj1vfC4).
+For more details, including instructions on how to image a microSD with Raspberry Pi OS, refer to [Detailed installation](./docs/installation.md). A video walkthrough is available at [YouTube tutorial](https://youtu.be/L5PvQj1vfC4).
 
 ## Update
 To update your InkyPi with the latest code changes, follow these steps:

@@ -127,6 +127,10 @@ This project has been tested with several Waveshare models. **Displays based on 
 
 If your display model has a corresponding driver in the link above, it’s likely to be compatible. When running the installation script, use the -W option to specify your display model (without the .py extension). The script will automatically fetch and install the correct driver.
 
+## Support for Devices Without Connected Displays
+
+InkyPi can also run on supported devices that do not have a compatible E-Ink display connected. This is useful for development, testing the web interface, or preparing layouts and plugins before hardware is available. When running without a display, content is not rendered to a physical panel and some display-specific features may be limited; see [installation.md](./docs/installation.md) and [troubleshooting.md](./docs/troubleshooting.md) for configuration notes and current limitations.
+
 ## License
 
 Distributed under the GPL 3.0 License, see [LICENSE](./LICENSE) for more information.

@@ -127,6 +127,9 @@ This project has been tested with several Waveshare models. **Displays based on 
 
 If your display model has a corresponding driver in the link above, it’s likely to be compatible. When running the installation script, use the -W option to specify your display model (without the .py extension). The script will automatically fetch and install the correct driver.
 
+## Wichita, Kansas Displays
+
+InkyPi can also be used with compatible Wichita, Kansas–branded e‑paper displays, provided they expose a Raspberry Pi–compatible SPI interface and have suitable drivers available. When installing, configure them using the same process as for Waveshare displays, specifying the appropriate model identifier with the `-W` option if a matching driver is available.
 ## License
 
 Distributed under the GPL 3.0 License, see [LICENSE](./LICENSE) for more information.

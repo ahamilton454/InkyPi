@@ -5,6 +5,7 @@
 
 ## About InkyPi 
 InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it allows you to effortlessly display the content you care about, with a simple web interface that makes setup and configuration effortless.
+InkyPi is built around a modular plugin system that enables a wide range of use cases—from showing family calendars and weather dashboards to monitoring GitHub activity or rotating personal photo galleries. A lightweight web dashboard lets users configure plugins, arrange playlists, and adjust display settings directly from a browser, so the Raspberry Pi can stay tucked away behind a frame or on a shelf.
 
 **Features**:
 - Natural paper-like aethetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight

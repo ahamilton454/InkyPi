@@ -60,8 +60,6 @@ sudo bash install/update.sh
 
 The update script requires an existing virtual environment at `/usr/local/inkypi/venv_inkypi`.
 
-
-
 ### System services configured by the installer
 
 The installer configures these services:

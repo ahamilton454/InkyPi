@@ -64,9 +64,17 @@ To install InkyPi, follow these steps:
     ```bash
     sudo bash install/install.sh [-W <waveshare device model>]
     ``` 
-     Option: 
+     Option:
     
-    * -W \<waveshare device model\> - specify this parameter **ONLY** if installing for a Waveshare display.  After the -W option specify the Waveshare device model e.g. epd7in3f.
+    * `-W <waveshare device model>` - specify this parameter **only** when installing for a Waveshare display. Provide the Waveshare device model (for example, `epd7in3f`).
+
+### Security note
+
+The InkyPi web interface and service run on the Raspberry Pi and should be treated as an administrative surface.
+
+- Restrict access to trusted networks (for example, a private LAN or VPN).
+- Avoid exposing the service directly to the public internet.
+- Keep Raspberry Pi OS and InkyPi dependencies up to date.
 
     e.g. for Inky displays use:
     ```bash
@@ -77,13 +85,6 @@ To install InkyPi, follow these steps:
     ```bash
     sudo bash install/install.sh -W epd7in3f
     ```
-
-### Security note
-
-The InkyPi web interface and service run on the Raspberry Pi and should be treated as an administrative surface.
-
-- Restrict network access to trusted clients (for example, a private LAN or VPN).
-- Avoid exposing the service directly to the public internet.
 
 After the installation is complete, the script will prompt you to reboot your Raspberry Pi. Once rebooted, the display will update to show the InkyPi splash screen.
 

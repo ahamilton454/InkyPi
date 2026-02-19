@@ -127,6 +127,15 @@ This project has been tested with several Waveshare models. **Displays based on 
 
 If your display model has a corresponding driver in the link above, it’s likely to be compatible. When running the installation script, use the -W option to specify your display model (without the .py extension). The script will automatically fetch and install the correct driver.
 
+
+## Other Display Types
+
+In addition to the Inky and Waveshare e-Paper displays listed above, InkyPi has experimental support for additional SPI-connected e-ink displays and controller boards.
+
+These alternate displays are supported through the same driver abstraction used for Waveshare devices. As long as a compatible Python driver is available for the target display and it exposes a similar framebuffer-style API, InkyPi can usually be adapted to drive it.
+
+Support for these non-similar / alternate displays is community-maintained and may require some manual configuration or small code changes. For guidance on extending display support, see [development.md](./docs/development.md) and [Building InkyPi Plugins](./docs/building_plugins.md).
+
 ## License
 
 Distributed under the GPL 3.0 License, see [LICENSE](./LICENSE) for more information.

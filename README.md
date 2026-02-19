@@ -175,5 +175,5 @@ inkypi plugin list
 ### Notes
 
 - `inkypi plugin install` performs a shallow clone of the repository and expects a top-level folder that matches `<plugin_id>`.
-- `inkypi plugin uninstall` removes the plugin directory.
+- `inkypi plugin uninstall` removes the plugin directory at `src/plugins/<plugin_id>`.
 - `inkypi plugin install` and `inkypi plugin uninstall` restart `inkypi.service`.

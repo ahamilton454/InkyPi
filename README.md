@@ -49,7 +49,9 @@ See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-m
 **Disclosure:** The links above are affiliate links. I may earn a commission from qualifying purchases made through them, at no extra cost to you, which helps maintain and develop this project.
 
 ## Installation
-To install InkyPi, follow these steps:
+For end-to-end setup steps (including flashing Raspberry Pi OS), follow the detailed guide at [Detailed installation](./docs/installation.md).
+
+To install InkyPi from the repository, follow these steps:
 
 1. Clone the repository:
     ```bash
@@ -85,6 +87,16 @@ Note:
 - The installation process will automatically enable the required SPI and I2C interfaces on your Raspberry Pi.
 
 For more details, including instructions on how to image your microSD with Raspberry Pi OS, refer to [installation.md](./docs/installation.md). You can also checkout [this YouTube tutorial](https://youtu.be/L5PvQj1vfC4).
+
+### Service entrypoint
+
+The installer configures a systemd unit named `inkypi.service` that starts InkyPi via:
+
+```bash
+inkypi run
+```
+
+The `inkypi` entry script is installed at `/usr/local/bin/inkypi`.
 
 ## Update
 To update your InkyPi with the latest code changes, follow these steps:

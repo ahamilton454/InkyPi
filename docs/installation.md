@@ -50,6 +50,14 @@ sudo bash install/install.sh -W <waveshare_device_model>
 
 The installer downloads a matching driver file into `src/display/waveshare_epd/` using the model name (for example, `<waveshare_device_model>.py`) and also downloads `epdconfig.py` into the same directory.
 
+### Service entrypoint
+
+The installer configures a systemd unit named `inkypi.service`. The unit starts InkyPi via:
+
+```bash
+inkypi run
+```
+
 ## Updating InkyPi
 
 Use the update script to install system dependencies, upgrade Python packages in the existing virtual environment, refresh the `inkypi` executable, update JS/CSS vendor assets, and restart the systemd service.

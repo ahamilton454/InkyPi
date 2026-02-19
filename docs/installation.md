@@ -62,7 +62,7 @@ The update script requires an existing virtual environment at `/usr/local/inkypi
 
 ### System services configured by the installer
 
-The installer configures these services:
+The installer configures the following services to keep the device responsive and ready for long-running display workloads:
 
 - Enables SPI and I2C.
 - Installs and enables `earlyoom`.

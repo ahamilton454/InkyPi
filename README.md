@@ -159,3 +159,21 @@ Check out these similar projects:
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency
+
+## Third-party plugins (CLI)
+
+InkyPi includes a plugin management CLI under the `inkypi` command.
+
+### Commands
+
+```bash
+inkypi plugin install <plugin_id> <git_repository_url>
+inkypi plugin uninstall <plugin_id>
+inkypi plugin list
+```
+
+### Notes
+
+- `inkypi plugin install` performs a shallow clone of the repository and expects a top-level folder that matches `<plugin_id>`.
+- `inkypi plugin uninstall` removes the plugin directory.
+- `inkypi plugin install` and `inkypi plugin uninstall` restart `inkypi.service`.

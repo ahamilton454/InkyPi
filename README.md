@@ -126,6 +126,11 @@ This project has been tested with several Waveshare models. **Displays based on 
 
 If your display model has a corresponding driver in the link above, it’s likely to be compatible. When running the installation script, use the -W option to specify your display model (without the .py extension). The script will automatically fetch and install the correct driver.
 
+
+## Smaller and simpler displays
+
+InkyPi can also run on smaller or more basic e‑Paper displays, including monochrome and lower‑resolution panels. These compact screens work well for minimalist layouts such as clocks, simple status dashboards, or single‑plugin views. When using a smaller display, choose plugins and layouts with concise content so that text and graphics remain clear and readable.
+
 ## License
 
 Distributed under the GPL 3.0 License, see [LICENSE](./LICENSE) for more information.
@@ -159,7 +164,3 @@ Check out these similar projects:
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency
 
-
-## Smaller and simpler displays
-
-InkyPi can also run on smaller or more basic e‑Paper displays, including monochrome and lower‑resolution panels. These compact screens work well for minimalist layouts such as clocks, simple status dashboards, or single‑plugin views. When using a smaller display, choose plugins and layouts with concise content so that text and graphics remain clear and readable.

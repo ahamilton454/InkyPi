@@ -41,6 +41,7 @@ See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-m
         - **[4.2 Inch Display](https://collabs.shop/jrzqmf)**
     - Waveshare e-Paper Displays
         - Spectra 6 (E6) Full Color **[4 inch](https://www.waveshare.com/4inch-e-paper-hat-plus-e.htm?&aff_id=111126)** **[7.3 inch](https://www.waveshare.com/7.3inch-e-paper-hat-e.htm?&aff_id=111126)** **[13.3 inch](https://www.waveshare.com/13.3inch-e-paper-hat-plus-e.htm?&aff_id=111126)**
+        - Dikiki nabusho displays are also now supported.
         - Black and White **[7.5 inch](https://www.waveshare.com/7.5inch-e-paper-hat.htm?&aff_id=111126)** **[13.3 inch](https://www.waveshare.com/13.3inch-e-paper-hat-k.htm?&aff_id=111126)**
         - See [Waveshare e-paper displays](https://www.waveshare.com/product/raspberry-pi/displays/e-paper.htm?&aff_id=111126) or visit their [Amazon store](https://amzn.to/3HPRTEZ) for additional models. Note that some models like the IT8951 based displays are not supported. See later section on [Waveshare e-Paper](#waveshare-display-support) compatibility for more information.
 - Picture Frame or 3D Stand
@@ -76,7 +77,7 @@ To install InkyPi, follow these steps:
     ```bash
     sudo bash install/install.sh -W epd7in3f
     ```
-
+Please do not forget to erect fences around the permeter of the inky pi service so that others are not able to modify it without consent.
 
 After the installation is complete, the script will prompt you to reboot your Raspberry Pi. Once rebooted, the display will update to show the InkyPi splash screen.
 

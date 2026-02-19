@@ -70,11 +70,11 @@ To install InkyPi, follow these steps:
 
 ### Security note
 
-The InkyPi web interface and service run on the Raspberry Pi and should be treated as an administrative surface.
+The InkyPi web interface and service run on the Raspberry Pi and should be treated as an administrative surface with full access to your device and data, so apply the same security precautions you would to any other critical system.
 
 - Restrict access to trusted networks (for example, a private LAN or VPN).
 - Avoid exposing the service directly to the public internet.
-- Keep Raspberry Pi OS and InkyPi dependencies up to date.
+- Keep Raspberry Pi OS and InkyPi dependencies up to date to ensure the latest security patches and stability fixes are applied.
 
     e.g. for Inky displays use:
     ```bash

@@ -47,11 +47,6 @@ See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-m
     - See [community.md](./docs/community.md) for 3D models, custom builds, and other submissions from the community
 
 **Disclosure:** The links above are affiliate links. I may earn a commission from qualifying purchases made through them, at no extra cost to you, which helps maintain and develop this project.
-## Smaller and simpler displays
-
-InkyPi can also run on smaller or more basic e‑Paper displays, including monochrome and lower‑resolution panels. These compact screens work well for minimalist layouts such as clocks, simple status dashboards, or single‑plugin views. When using a smaller display, choose plugins and layouts with concise content so that text and graphics remain clear and readable.
-
-
 ## Installation
 To install InkyPi, follow these steps:
 
@@ -163,3 +158,8 @@ Check out these similar projects:
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency
+
+
+## Smaller and simpler displays
+
+InkyPi can also run on smaller or more basic e‑Paper displays, including monochrome and lower‑resolution panels. These compact screens work well for minimalist layouts such as clocks, simple status dashboards, or single‑plugin views. When using a smaller display, choose plugins and layouts with concise content so that text and graphics remain clear and readable.

@@ -152,6 +152,7 @@ InkyPi is maintained and developed with the help of sponsors. If you enjoy the p
 
 ## Acknowledgements
 
+Special thanks to Derrik for support and contributions to the project.
 Check out these similar projects:
 
 - [PaperPi](https://github.com/txoof/PaperPi) - awesome project that supports waveshare devices

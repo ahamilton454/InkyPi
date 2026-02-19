@@ -31,3 +31,40 @@
 </p>
 
 4. Click Yes to apply OS customization options and confirm
+
+## Installing InkyPi
+
+Run the installer from the repository root.
+
+```bash
+sudo bash install/install.sh
+```
+
+### Waveshare displays
+
+Waveshare installations use a display model identifier.
+
+```bash
+sudo bash install/install.sh -W <waveshare_device_model>
+```
+
+The installer downloads a matching driver file into `src/display/waveshare_epd/` using the model name (for example, `<waveshare_device_model>.py`) and also downloads `epdconfig.py` into the same directory.
+
+### System services configured by the installer
+
+The installer configures these services:
+
+- Enables SPI and I2C.
+- Installs and enables `earlyoom`.
+- On Raspberry Pi OS Bookworm (version `12`), installs and enables `zramswap` (via `zram-tools`) and writes `/etc/default/zramswap`.
+
+## Updating InkyPi
+
+Use the update script to install system dependencies, upgrade Python packages in the existing virtual environment, refresh the `inkypi` executable, update JS/CSS vendor assets, and restart the systemd service.
+
+```bash
+sudo bash install/update.sh
+```
+
+The update script requires an existing virtual environment at `/usr/local/inkypi/venv_inkypi`.
+

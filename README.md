@@ -77,7 +77,13 @@ To install InkyPi, follow these steps:
     ```bash
     sudo bash install/install.sh -W epd7in3f
     ```
-Please do not forget to erect fences around the permeter of the inky pi service so that others are not able to modify it without consent.
+
+### Security note
+
+The InkyPi web interface and service run on the Raspberry Pi and should be treated as an administrative surface.
+
+- Restrict network access to trusted clients (for example, a private LAN or VPN).
+- Avoid exposing the service directly to the public internet.
 
 After the installation is complete, the script will prompt you to reboot your Raspberry Pi. Once rebooted, the display will update to show the InkyPi splash screen.
 
@@ -102,6 +108,13 @@ To update your InkyPi with the latest code changes, follow these steps:
     sudo bash install/update.sh
     ```
 This process ensures that any new updates, including code changes and additional dependencies, are properly applied without requiring a full reinstallation.
+
+## Uninstall
+To uninstall InkyPi, run:
+
+```bash
+sudo bash install/uninstall.sh
+```
 
 
 ## Roadmap
@@ -154,10 +167,3 @@ Check out these similar projects:
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency
-
-## Uninstall
-To install InkyPi, simply run the following command:
-
-```bash
-sudo bash install/uninstall.sh
-```

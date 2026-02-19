@@ -27,6 +27,11 @@ And additional plugins coming soon! For documentation on building custom plugins
 
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
+## Display compatibility
+InkyPi supports both Pimoroni Inky displays and Waveshare e-Paper displays.
+
+For Waveshare displays, the installation uses the `-W <waveshare device model>` option described in [Installation](#installation). See [Waveshare Display Support](#waveshare-display-support) for compatibility notes.
+
 ## Hardware 
 - Raspberry Pi (4 | 3 | Zero 2 W)
     - Recommended to get 40 pin Pre Soldered Header

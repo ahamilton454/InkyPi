@@ -110,14 +110,6 @@ To update your InkyPi with the latest code changes, follow these steps:
     ```
 This process ensures that any new updates, including code changes and additional dependencies, are properly applied without requiring a full reinstallation.
 
-## Uninstall
-To uninstall InkyPi, run:
-
-```bash
-sudo bash install/uninstall.sh
-```
-
-
 ## Roadmap
 The InkyPi project is constantly evolving, with many exciting features and improvements planned for the future.
 
@@ -168,3 +160,11 @@ Check out these similar projects:
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency
+
+## Uninstall
+
+To uninstall InkyPi, run:
+
+```bash
+sudo bash install/uninstall.sh
+```

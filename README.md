@@ -1,4 +1,4 @@
-# InkyPi 
+# InkyPi Is so Cool
 
 <img src="./docs/images/inky_clock.jpg" />
 

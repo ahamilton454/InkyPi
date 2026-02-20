@@ -3,28 +3,6 @@
 <img src="./docs/images/inky_clock.jpg" />
 
 
-## About InkyPi 
-InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it allows you to effortlessly display the content you care about, with a simple web interface that makes setup and configuration effortless.
-
-**Features**:
-- Natural paper-like aethetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight
-- Web Interface allows you to update and configure the display from any device on your network
-- Minimize distractions: no LEDS, noise, or notifications, just the content you care about
-- Easy installation and configuration, perfect for beginners and makers alike
-- Open source project allowing you to modify, customize, and create your own plugins
-- Set up scheduled playlists to display different plugins at designated times
-
-**Plugins**:
-
-- Image Upload: Upload and display any image from your browser
-- Daily Newspaper/Comic: Show daily comics and front pages of major newspapers from around the world
-- Clock: Customizable clock faces for displaying time
-- AI Image/Text: Generate images and dynamic text from prompts using OpenAI's models
-- Weather: Display current weather conditions and multi-day forecasts with a customizable layout
-- Calendar: Visualize your calendar from Google, Outlook, or Apple Calendar with customizable layouts
-
-And additional plugins coming soon! For documentation on building custom plugins, see [Building InkyPi Plugins](./docs/building_plugins.md).
-
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
 ## Hardware 
@@ -159,3 +137,26 @@ Check out these similar projects:
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency
+
+
+## About InkyPi 
+InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it allows you to effortlessly display the content you care about, with a simple web interface that makes setup and configuration effortless.
+
+**Features**:
+- Natural paper-like aethetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight
+- Web Interface allows you to update and configure the display from any device on your network
+- Minimize distractions: no LEDS, noise, or notifications, just the content you care about
+- Easy installation and configuration, perfect for beginners and makers alike
+- Open source project allowing you to modify, customize, and create your own plugins
+- Set up scheduled playlists to display different plugins at designated times
+
+**Plugins**:
+
+- Image Upload: Upload and display any image from your browser
+- Daily Newspaper/Comic: Show daily comics and front pages of major newspapers from around the world
+- Clock: Customizable clock faces for displaying time
+- AI Image/Text: Generate images and dynamic text from prompts using OpenAI's models
+- Weather: Display current weather conditions and multi-day forecasts with a customizable layout
+- Calendar: Visualize your calendar from Google, Outlook, or Apple Calendar with customizable layouts
+
+And additional plugins coming soon! For documentation on building custom plugins, see [Building InkyPi Plugins](./docs/building_plugins.md).

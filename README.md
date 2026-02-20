@@ -1,4 +1,17 @@
 # InkyPi Is so Cool
+## About InkyPi 
+InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it allows you to effortlessly display the content you care about, with a simple web interface that makes setup and configuration effortless.
+
+**Features**:
+- Natural paper-like aethetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight
+- Web Interface allows you to update and configure the display from any device on your network
+- Minimize distractions: no LEDS, noise, or notifications, just the content you care about
+- Easy installation and configuration, perfect for beginners and makers alike
+- Open source project allowing you to modify, customize, and create your own plugins
+- Set up scheduled playlists to display different plugins at designated times
+
+**Plugins**:
+
 
 
 - Image Upload: Upload and display any image from your browser
@@ -147,15 +160,3 @@ Check out these similar projects:
 <img src="./docs/images/inky_clock.jpg" />
 
 
-## About InkyPi 
-InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it allows you to effortlessly display the content you care about, with a simple web interface that makes setup and configuration effortless.
-
-**Features**:
-- Natural paper-like aethetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight
-- Web Interface allows you to update and configure the display from any device on your network
-- Minimize distractions: no LEDS, noise, or notifications, just the content you care about
-- Easy installation and configuration, perfect for beginners and makers alike
-- Open source project allowing you to modify, customize, and create your own plugins
-- Set up scheduled playlists to display different plugins at designated times
-
-**Plugins**:

@@ -27,6 +27,53 @@ And additional plugins coming soon! For documentation on building custom plugins
 
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
+## Third-party plugin management (CLI)
+
+InkyPi includes a plugin CLI for installing and managing third-party plugins from git repositories.
+
+### Commands
+
+```bash
+inkypi plugin install <plugin_id> <git_repository_url>
+inkypi plugin uninstall <plugin_id>
+inkypi plugin list
+```
+
+### Install a plugin
+
+```bash
+inkypi plugin install <plugin_id> <git_repository_url>
+```
+
+`<plugin_id>` must match a top-level folder in the plugin repository.
+
+If `requirements.txt` exists in the installed plugin folder, dependencies are installed into the InkyPi virtual environment.
+
+The `inkypi.service` systemd unit is restarted after installation.
+
+### Uninstall a plugin
+
+```bash
+inkypi plugin uninstall <plugin_id>
+```
+
+The `inkypi.service` systemd unit is restarted after uninstall.
+
+### List installed plugins
+
+```bash
+inkypi plugin list
+```
+
+Output includes the plugin `id`, `display_name`, inferred `type` (`builtin` or `third_party`), and the `repository` field from `plugin-info.json`.
+
+## Confluence
+
+This repository README can include a mirrored copy of the project Confluence page.
+
+- Confluence page URL: `<add link>`
+- Sync method: paste the exported Markdown content below this section.
+
 ## Hardware 
 - Raspberry Pi (4 | 3 | Zero 2 W)
     - Recommended to get 40 pin Pre Soldered Header

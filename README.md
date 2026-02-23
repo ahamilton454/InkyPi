@@ -71,8 +71,21 @@ Output includes the plugin `id`, `display_name`, inferred `type` (`builtin` or `
 
 This repository README can include a mirrored copy of the project Confluence page.
 
-- Confluence page URL: `<add link>`
-- Sync method: paste the exported Markdown content below this section.
+### Source
+
+- Confluence page URL: `<add confluence page url>`
+
+### Sync method
+
+1. Export the Confluence page as Markdown.
+2. Paste the exported Markdown below the `<!-- confluence export start -->` marker.
+3. Paste the exported Markdown assets (images/attachments), then update any relative links.
+
+<!-- confluence export start -->
+
+<!-- Paste exported Markdown content here. -->
+
+<!-- confluence export end -->
 
 ## Hardware 
 - Raspberry Pi (4 | 3 | Zero 2 W)

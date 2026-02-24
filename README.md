@@ -18,7 +18,7 @@ InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. 
 
 - Image Upload: Upload and display any image from your browser
 - Daily Newspaper/Comic: Show daily comics and front pages of major newspapers from around the world
-- Clock: Customizable clock faces for displaying time
+- Clock: Customizable clock faces for displaying time (color settings accept CSS-style strings such as `"white"` or `"#ffffff"`)
 - AI Image/Text: Generate images and dynamic text from prompts using OpenAI's models
 - Weather: Display current weather conditions and multi-day forecasts with a customizable layout
 - Calendar: Visualize your calendar from Google, Outlook, or Apple Calendar with customizable layouts
@@ -109,6 +109,10 @@ To update your InkyPi with the latest code changes, follow these steps:
     sudo bash install/update.sh
     ```
 This process ensures that any new updates, including code changes and additional dependencies, are properly applied without requiring a full reinstallation.
+
+### Dependency versions
+
+The installation and update scripts install pinned dependency versions from `install/requirements.txt` and `install/requirements-dev.txt`.
 
 ## Uninstall
 To install InkyPi, simply run the following command:

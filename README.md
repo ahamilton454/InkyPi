@@ -23,6 +23,14 @@ InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. 
 - Weather: Display current weather conditions and multi-day forecasts with a customizable layout
 - Calendar: Visualize your calendar from Google, Outlook, or Apple Calendar with customizable layouts
 
+### Image padding background color
+
+Several image plugins support optional padding to fit a target resolution while preserving aspect ratio.
+
+- `padImage`: Enables padding when set to `"true"`.
+- `backgroundOption`: Selects the padding background style. The `"blur"` option uses a blurred version of the image as the background.
+- `backgroundColor`: When `backgroundOption` is not `"blur"`, the value is parsed as a color string (for example, `"white"` or `"#ffffff"`) and applied using the image's mode. This supports grayscale (`L`) images.
+
 And additional plugins coming soon! For documentation on building custom plugins, see [Building InkyPi Plugins](./docs/building_plugins.md).
 
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.

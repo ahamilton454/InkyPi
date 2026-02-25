@@ -159,3 +159,8 @@ Check out these similar projects:
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency
+
+## External sources
+
+- [`https://example.com`](https://example.com): "This domain is for use in documentation examples without needing permission. Avoid use in operations."
+- `https://nonexistent.invalid/does-not-exist`: Source could not be retrieved (`lookup nonexistent.invalid: no such host`).

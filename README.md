@@ -102,6 +102,19 @@ To update your InkyPi with the latest code changes, follow these steps:
     ```
 This process ensures that any new updates, including code changes and additional dependencies, are properly applied without requiring a full reinstallation.
 
+## Image padding background colors
+
+Several image-based plugins support padding an image to match the device resolution. When padding is enabled and a solid background color is selected (instead of a blur background), the padding color is resolved using the image mode.
+
+For grayscale images (Pillow mode `L`), the background color must be provided as a string (for example, `"white"` or `"#ffffff"`). Tuple-based RGB values are not supported for grayscale images.
+
+## Sources not available during this update
+
+The following sources were requested but could not be accessed from this environment, so no content was incorporated from them:
+
+- https://example.com
+- https://nonexistent.invalid/does-not-exist
+
 ## Uninstall
 To install InkyPi, simply run the following command:
 

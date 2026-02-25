@@ -112,8 +112,11 @@ For grayscale images (Pillow mode `L`), the background color must be provided as
 
 The following sources were requested but could not be accessed from this environment, so no content was incorporated from them:
 
-- https://example.com
 - https://nonexistent.invalid/does-not-exist
+
+The following source was accessible but did not contain InkyPi-specific information to incorporate into the README:
+
+- https://example.com
 
 ## Uninstall
 To install InkyPi, simply run the following command:

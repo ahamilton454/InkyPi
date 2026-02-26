@@ -27,6 +27,34 @@ And additional plugins coming soon! For documentation on building custom plugins
 
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
+## AI-generated filler content ("AI slop")
+
+AI-generated filler content, often called "AI slop," refers to high-volume, low-effort text or images produced by generative AI tools (for example, ChatGPT or Midjourney). It is commonly used to fill space quickly, create search engine-optimized (SEO) material, or generate dummy content. The output is often criticized for being generic, repetitive, and lacking depth.
+
+### Common uses
+
+- Text generation: blog posts, product descriptions, or social media content used to quickly populate a site
+- Image generation: placeholder images for websites, presentations, or advertisements
+- Generative fill: tools such as Adobe Photoshop Generative Fill or Canva Magic Edit used to extend backgrounds or add, remove, or edit objects in an existing image
+- AI content filler: tools that fill selected parts of a document as an alternative to "Lorem Ipsum"
+
+### Pros and cons
+
+**Pros**
+
+- Rapid content production and time savings
+- Large volume of customizable content at low cost
+
+**Cons**
+
+- Repetitive, cookie-cutter output that is easy to recognize as AI-written
+- Risk of lowering credibility when low-effort content replaces substantive content
+
+### Best practices
+
+- Treat AI-generated content as a draft.
+- Apply human review to ensure content is accurate, engaging, and unique.
+
 ## Hardware 
 - Raspberry Pi (4 | 3 | Zero 2 W)
     - Recommended to get 40 pin Pre Soldered Header

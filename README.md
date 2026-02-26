@@ -27,6 +27,24 @@ And additional plugins coming soon! For documentation on building custom plugins
 
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
+## External references
+
+The following links were provided for inclusion in this README. Current automated lookups report these results:
+
+- `https://example.com/readable-link` (HTTP `404`)
+- `https://fasfpsajfis.com/sjijfoasijf-link` (DNS lookup failure: host not found)
+
+If updated URLs are available, provide replacements to include as references.
+
+## Image padding background color
+
+Several image-based plugins support optional padding (`padImage`) with a configurable background:
+
+- `backgroundOption=blur` uses a blurred padding background.
+- Otherwise, padding uses `backgroundColor` resolved via `PIL.ImageColor.getcolor(..., img.mode)`.
+
+This mode-based color resolution avoids failures when padding grayscale (`L` mode) images.
+
 ## Hardware 
 - Raspberry Pi (4 | 3 | Zero 2 W)
     - Recommended to get 40 pin Pre Soldered Header

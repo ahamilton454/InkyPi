@@ -149,6 +149,33 @@ InkyPi is maintained and developed with the help of sponsors. If you enjoy the p
 <a href="https://www.buymeacoffee.com/akzdev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="35" width="auto"></a>
 </p>
 
+## AI slop (AI-generated filler content)
+
+AI-generated filler content (often called "AI slop") refers to high-volume, low-effort text or images produced by generative models, often used to fill space or generate SEO-focused material. The content is frequently generic, repetitive, and low in depth.
+
+### Common uses
+
+- Text generation for blog posts, product descriptions, or social media content used to populate websites quickly
+- Image generation for placeholder images in websites, presentations, or advertisements
+- Generative editing tools (for example, background extension and object insertion/removal) used as an alternative to stock assets
+- Document filler tools that generate placeholder copy as an alternative to "Lorem Ipsum"
+
+### Pros and cons
+
+**Pros**
+
+- Enables rapid content production and iteration
+- Reduces time spent producing first drafts and placeholders
+
+**Cons**
+
+- Produces repetitive or "cookie-cutter" output
+- Risks lowering credibility when the output is recognizably synthetic or incorrect
+
+### Best practice
+
+Treat AI-generated filler as a draft. Human review is required to ensure correctness, clarity, and originality.
+
 
 ## Acknowledgements
 

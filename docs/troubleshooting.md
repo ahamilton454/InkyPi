@@ -214,3 +214,9 @@ For more details on how each setting behaves, see the [Pillow documentation](htt
 For Inky displays from Pimoroni, there is an additional option for `Inky Driver Saturation` in the Settings page. This controls the saturation of the palette to which an image is dithered to in the Inky library. Try setting this to '0' which seems to improve the quality of images displayed.
 
 See [this response](https://github.com/pimoroni/inky/issues/225#issuecomment-3213935144) from the Pimoroni team for more details.
+
+## Error when padding images with a background color
+
+Some image-based plugins support padding an image to the display resolution using a background color (instead of a blurred background). When a source image is grayscale (Pillow image mode `L`), a background color must be provided as a string (for example, `"white"` or `"#ffffff"`) so that Pillow can resolve the color for the image mode.
+
+If padding with a background color fails, set the plugin background color to a string value and retry.

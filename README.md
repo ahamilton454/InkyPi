@@ -159,3 +159,7 @@ Check out these similar projects:
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency
+
+## Test: content from Drive file
+
+_Content from external files (for example, documents stored in Google Drive) cannot be automatically imported into this README from within this documentation system. To include that content, copy it from the source file and paste it into this section manually._

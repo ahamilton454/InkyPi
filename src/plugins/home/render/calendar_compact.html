@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="calendar-section">
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <h2 class="calendar-title">{{ date }}</h2>
+        </div>
+
+        <div class="events-list">
+            {% if events %}
+                {% for event in events %}
+                <div class="event-item">
+                    <div class="event-time">{{ event.time }}</div>
+                    <div class="event-title">{{ event.title }}</div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-events">No events scheduled</div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

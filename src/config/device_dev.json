@@ -7,6 +7,7 @@
     ],
     "orientation": "horizontal",
     "plugin_order": [
+        "home",
         "calendar",
         "ai_image",
         "ai_text",
@@ -41,9 +42,9 @@
         "active_playlist": null
     },
     "refresh_info": {
-        "refresh_time": null,
-        "image_hash": null,
-        "refresh_type": null,
-        "plugin_id": null
+        "refresh_time": "2026-03-15T03:22:54.999675+00:00",
+        "image_hash": "078ca7895b9e8ccf90d44aad6ab18593057b98ec480b132304fb542e29dd78ad",
+        "refresh_type": "Manual Update",
+        "plugin_id": "home"
     }
 }

@@ -49,7 +49,7 @@
                         "refresh": {
                             "interval": 3600
                         },
-                        "latest_refresh_time": "2026-03-15T20:05:50.963161+00:00"
+                        "latest_refresh_time": "2026-03-15T21:12:57.630704+00:00"
                     }
                 ],
                 "current_plugin_index": null
@@ -58,8 +58,8 @@
         "active_playlist": null
     },
     "refresh_info": {
-        "refresh_time": "2026-03-15T20:05:50.963161+00:00",
-        "image_hash": "d9b8fc9ee34dbefd5478d609d54bd938e6bae4f60b95ea81fdb425be57face3f",
+        "refresh_time": "2026-03-15T21:12:57.630704+00:00",
+        "image_hash": "96de2ae5fad80ab9d2a473426ccc98fd01f2dca3ba1f7dd3ac4027a3fd93f229",
         "refresh_type": "Playlist",
         "plugin_id": "home",
         "playlist": "Default",

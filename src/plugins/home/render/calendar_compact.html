@@ -22,7 +22,7 @@
             flex-direction: column;
         }
         .section-label {
-            font-size: 2.5vw;
+            font-size: 3vw;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -32,12 +32,12 @@
         .header {
             margin-bottom: 2vh;
             padding-bottom: 1.5vh;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 2px solid #999;
         }
         .date {
             font-size: 6vw;
-            font-weight: 600;
-            color: #111;
+            font-weight: 700;
+            color: #000;
         }
         .events {
             flex: 1;
@@ -48,14 +48,14 @@
             align-items: flex-start;
             gap: 2.5vw;
             padding: 1.5vh 0;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid #bbb;
         }
         .event:last-child {
             border-bottom: none;
         }
         .dot {
-            width: 2.2vw;
-            height: 2.2vw;
+            width: 2.5vw;
+            height: 2.5vw;
             border-radius: 50%;
             background: {{ calendar_color }};
             margin-top: 1vh;
@@ -67,16 +67,16 @@
         }
         .event-title {
             font-size: 4vw;
-            font-weight: 500;
-            color: #222;
+            font-weight: 600;
+            color: #000;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .event-time {
-            font-size: 3vw;
-            color: #888;
-            font-weight: 500;
+            font-size: 3.2vw;
+            color: #444;
+            font-weight: 600;
         }
         .empty {
             flex: 1;
@@ -84,7 +84,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #ccc;
+            color: #999;
         }
         .empty-icon {
             font-size: 10vw;
@@ -92,12 +92,12 @@
         }
         .empty-text {
             font-size: 4.5vw;
-            font-weight: 500;
-            color: #bbb;
+            font-weight: 600;
+            color: #777;
         }
         .empty-sub {
             font-size: 3vw;
-            color: #ccc;
+            color: #999;
             margin-top: 1vh;
         }
     </style>

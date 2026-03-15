@@ -169,13 +169,13 @@ class Home(BasePlugin):
         if not any_success:
             raise RuntimeError("Failed to generate any dashboard section. Please check your settings and API keys.")
 
-        # Draw thin divider lines between sections
+        # Draw divider lines between sections
         draw = ImageDraw.Draw(canvas)
-        line_color = '#ddd'
+        line_color = '#999'
         # Vertical divider between left and right columns
-        draw.line([(left_width, 0), (left_width, height)], fill=line_color, width=1)
+        draw.line([(left_width, 0), (left_width, height)], fill=line_color, width=2)
         # Horizontal divider on left side (weather / NASA)
-        draw.line([(0, weather_height), (left_width, weather_height)], fill=line_color, width=1)
+        draw.line([(0, weather_height), (left_width, weather_height)], fill=line_color, width=2)
 
         logger.info("Dashboard generation complete")
         return canvas

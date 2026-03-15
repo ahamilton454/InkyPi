@@ -11,9 +11,9 @@
             color: #000;
             background: #fff;
             overflow: hidden;
-            width: 400px;
-            height: 240px;
-            padding: 10px 14px;
+            width: {{ width }}px;
+            height: {{ height }}px;
+            padding: 2.5vh 3.5vw;
         }
         .container {
             width: 100%;
@@ -28,7 +28,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 6px;
+            padding-bottom: 1.5vh;
             border-bottom: 2px solid #ddd;
         }
         .now-info {
@@ -36,7 +36,7 @@
             flex-direction: column;
         }
         .now-label {
-            font-size: 10px;
+            font-size: 2.5vw;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -45,85 +45,72 @@
         .now-temp-row {
             display: flex;
             align-items: baseline;
-            gap: 3px;
+            gap: 0.5vw;
         }
         .temp {
-            font-size: 44px;
+            font-size: 10vw;
             font-weight: 700;
             line-height: 1;
-            letter-spacing: -2px;
+            letter-spacing: -0.5vw;
         }
         .unit {
-            font-size: 14px;
+            font-size: 3.5vw;
             font-weight: 600;
             color: #666;
         }
         .condition {
-            font-size: 13px;
+            font-size: 3.5vw;
             color: #555;
-            margin-top: 1px;
+            margin-top: 0.3vh;
         }
         .now-icon {
-            width: 44px;
-            height: 44px;
-            max-width: 44px;
-            max-height: 44px;
+            width: 11vw;
+            height: 11vw;
             object-fit: contain;
-        }
-
-        /* Today outlook */
-        .outlook {
-            font-size: 11px;
-            color: #444;
-            padding: 4px 0;
-            line-height: 1.3;
         }
 
         /* 3-day forecast */
         .forecast {
             width: 100%;
-            table-layout: fixed;
-            border-collapse: separate;
-            border-spacing: 6px 0;
+            display: flex;
+            gap: 1.5vw;
         }
-        .forecast td {
+        .forecast-day {
+            flex: 1;
             text-align: center;
-            vertical-align: top;
             background: #efefef;
-            border-radius: 10px;
-            padding: 6px 4px 5px;
+            border-radius: 2.5vw;
+            padding: 1vh 1vw;
         }
         .day-name {
             display: block;
-            font-size: 11px;
+            font-size: 3.2vw;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 2px;
+            margin-bottom: 0.3vh;
         }
         .day-icon {
-            width: 24px;
-            height: 24px;
-            max-width: 24px;
-            max-height: 24px;
+            width: 7vw;
+            height: 7vw;
             object-fit: contain;
             display: block;
-            margin: 0 auto 2px;
+            margin: 0 auto 0.3vh;
         }
         .temps {
-            margin-bottom: 2px;
+            margin-bottom: 0.3vh;
         }
         .hi {
-            font-size: 15px;
+            font-size: 4.5vw;
             font-weight: 700;
         }
         .lo {
-            font-size: 12px;
+            font-size: 3.5vw;
             color: #999;
-            margin-left: 3px;
+            margin-left: 0.5vw;
         }
         .detail {
-            font-size: 10px;
+            font-size: 3vw;
             line-height: 1.4;
         }
         .rain {
@@ -148,33 +135,27 @@
                 </div>
                 <span class="condition">{{ condition_text }}</span>
             </div>
-            <img src="file://{{ weather_icon }}" alt="" class="now-icon" width="44" height="44">
+            <img src="file://{{ weather_icon }}" alt="" class="now-icon">
         </div>
 
-        {% if today_outlook %}
-        <div class="outlook">{{ today_outlook }}</div>
-        {% endif %}
-
-        <table class="forecast">
-            <tr>
-                {% for day in forecast_days %}
-                <td>
-                    <span class="day-name">{{ day.name }}</span>
-                    <img src="file://{{ day.icon }}" alt="" class="day-icon" width="24" height="24">
-                    <div class="temps">
-                        <span class="hi">{{ day.high }}°</span>
-                        <span class="lo">{{ day.low }}°</span>
-                    </div>
-                    <div class="detail">
-                        {% if day.rain > 0 %}
-                        <span class="rain">&#9730; {{ day.rain }}%</span>
-                        {% endif %}
-                        <span class="uv">UV {{ day.uv }}</span>
-                    </div>
-                </td>
-                {% endfor %}
-            </tr>
-        </table>
+        <div class="forecast">
+            {% for day in forecast_days %}
+            <div class="forecast-day">
+                <span class="day-name">{{ day.name }}</span>
+                <img src="file://{{ day.icon }}" alt="" class="day-icon">
+                <div class="temps">
+                    <span class="hi">{{ day.high }}&deg;</span>
+                    <span class="lo">{{ day.low }}&deg;</span>
+                </div>
+                <div class="detail">
+                    {% if day.rain > 0 %}
+                    <span class="rain">&#9730; {{ day.rain }}%</span>
+                    {% endif %}
+                    <span class="uv">UV {{ day.uv }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </body>
 </html>

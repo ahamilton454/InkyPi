@@ -11,9 +11,9 @@
             color: #000;
             background: #fff;
             overflow: hidden;
-            width: 400px;
-            height: 420px;
-            padding: 14px 16px;
+            width: {{ width }}px;
+            height: {{ height }}px;
+            padding: 3vh 4vw;
         }
         .container {
             width: 100%;
@@ -22,20 +22,20 @@
             flex-direction: column;
         }
         .header {
-            margin-bottom: 12px;
-            padding-bottom: 10px;
+            margin-bottom: 2.5vh;
+            padding-bottom: 2vh;
             border-bottom: 2px solid {{ calendar_color }};
         }
         .label {
-            font-size: 11px;
+            font-size: 3.5vw;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: {{ calendar_color }};
-            margin-bottom: 2px;
+            margin-bottom: 0.5vh;
         }
         .date {
-            font-size: 20px;
+            font-size: 6.5vw;
             font-weight: 600;
             color: #000;
         }
@@ -46,19 +46,19 @@
         .event {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
-            padding: 7px 0;
+            gap: 2.5vw;
+            padding: 1.5vh 0;
             border-bottom: 1px solid #eee;
         }
         .event:last-child {
             border-bottom: none;
         }
         .dot {
-            width: 8px;
-            height: 8px;
+            width: 2.5vw;
+            height: 2.5vw;
             border-radius: 50%;
             background: {{ calendar_color }};
-            margin-top: 5px;
+            margin-top: 1vh;
             flex-shrink: 0;
         }
         .event-info {
@@ -66,7 +66,7 @@
             min-width: 0;
         }
         .event-title {
-            font-size: 14px;
+            font-size: 4.5vw;
             font-weight: 500;
             color: #000;
             white-space: nowrap;
@@ -74,7 +74,7 @@
             text-overflow: ellipsis;
         }
         .event-time {
-            font-size: 12px;
+            font-size: 3.5vw;
             color: #777;
             font-weight: 500;
         }
@@ -87,18 +87,18 @@
             color: #bbb;
         }
         .empty-icon {
-            font-size: 36px;
-            margin-bottom: 8px;
+            font-size: 10vw;
+            margin-bottom: 2vh;
         }
         .empty-text {
-            font-size: 15px;
+            font-size: 5vw;
             font-weight: 500;
             color: #aaa;
         }
         .empty-sub {
-            font-size: 12px;
+            font-size: 3.5vw;
             color: #ccc;
-            margin-top: 4px;
+            margin-top: 1vh;
         }
     </style>
 </head>

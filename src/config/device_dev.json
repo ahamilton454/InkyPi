@@ -35,16 +35,34 @@
                 "name": "Default",
                 "start_time": "00:00",
                 "end_time": "24:00",
-                "plugins": [],
+                "plugins": [
+                    {
+                        "plugin_id": "home",
+                        "name": "Home",
+                        "plugin_settings": {
+                            "calendarURL": "https://calendar.google.com/calendar/ical/ahamilton454%40gmail.com/private-96837b61a340fe5f65bc083dba2f7923/basic.ics",
+                            "calendarColor": "#4285f4",
+                            "latitude": "40.704587",
+                            "longitude": "-73.947601",
+                            "units": "imperial"
+                        },
+                        "refresh": {
+                            "interval": 3600
+                        },
+                        "latest_refresh_time": "2026-03-15T19:31:43.823740+00:00"
+                    }
+                ],
                 "current_plugin_index": null
             }
         ],
         "active_playlist": null
     },
     "refresh_info": {
-        "refresh_time": "2026-03-15T04:14:08.137982+00:00",
-        "image_hash": "c5892f3d8406a82fea088b93b9cde7f90fb00cd8323582abfff30a09ca169147",
-        "refresh_type": "Manual Update",
-        "plugin_id": "home"
+        "refresh_time": "2026-03-15T19:31:43.823740+00:00",
+        "image_hash": "3813e6d1ee4e59f87f103aa2e67b954d1879d73d27d25ce78127cc50550b9783",
+        "refresh_type": "Playlist",
+        "plugin_id": "home",
+        "playlist": "Default",
+        "plugin_instance": "Home"
     }
 }

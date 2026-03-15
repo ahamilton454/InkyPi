@@ -74,14 +74,13 @@ class Home(BasePlugin):
         width, height = dimensions
         canvas = Image.new('RGB', (width, height), 'white')
 
-        # Define regions (50/50 split)
+        # Define regions
         left_width = width // 2
         right_width = width - left_width
-        top_height = height // 2
-        weather_height = top_height
+        weather_height = height // 2
         nasa_height = height - weather_height
-        calendar_height = height - 60
-        timestamp_height = 60
+        timestamp_height = max(40, height // 8)
+        calendar_height = height - timestamp_height
 
         # Track if any section succeeded
         any_success = False
@@ -387,7 +386,8 @@ class Home(BasePlugin):
 
         # Try to load a font, fall back to default if not available
         try:
-            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 16)
+            font_size = max(12, height // 3)
+            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", font_size)
         except:
             font = ImageFont.load_default()
 

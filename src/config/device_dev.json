@@ -2,8 +2,8 @@
     "name": "InkyPi Development",
     "display_type": "mock",
     "resolution": [
-        800,
-        480
+        1600,
+        1200
     ],
     "orientation": "horizontal",
     "plugin_order": [
@@ -49,7 +49,7 @@
                         "refresh": {
                             "interval": 3600
                         },
-                        "latest_refresh_time": "2026-03-15T19:31:43.823740+00:00"
+                        "latest_refresh_time": "2026-03-15T20:05:50.963161+00:00"
                     }
                 ],
                 "current_plugin_index": null
@@ -58,8 +58,8 @@
         "active_playlist": null
     },
     "refresh_info": {
-        "refresh_time": "2026-03-15T19:31:43.823740+00:00",
-        "image_hash": "3813e6d1ee4e59f87f103aa2e67b954d1879d73d27d25ce78127cc50550b9783",
+        "refresh_time": "2026-03-15T20:05:50.963161+00:00",
+        "image_hash": "d9b8fc9ee34dbefd5478d609d54bd938e6bae4f60b95ea81fdb425be57face3f",
         "refresh_type": "Playlist",
         "plugin_id": "home",
         "playlist": "Default",

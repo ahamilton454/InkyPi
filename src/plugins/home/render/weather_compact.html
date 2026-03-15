@@ -8,19 +8,26 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            color: #000;
-            background: #fff;
+            color: #222;
+            background: #f8f8f8;
             overflow: hidden;
             width: {{ width }}px;
             height: {{ height }}px;
-            padding: 2.5vh 3.5vw;
+            padding: 4vh 4vw 3vh;
         }
         .container {
             width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+        }
+
+        .section-label {
+            font-size: 2.5vw;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #888;
+            margin-bottom: 0.5vh;
         }
 
         /* Current conditions */
@@ -28,19 +35,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding-bottom: 1.5vh;
-            border-bottom: 2px solid #ddd;
+            padding-bottom: 2vh;
+            border-bottom: 1px solid #ddd;
         }
         .now-info {
             display: flex;
             flex-direction: column;
-        }
-        .now-label {
-            font-size: 2.5vw;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #999;
         }
         .now-temp-row {
             display: flex;
@@ -52,15 +52,16 @@
             font-weight: 700;
             line-height: 1;
             letter-spacing: -0.5vw;
+            color: #111;
         }
         .unit {
             font-size: 3.5vw;
-            font-weight: 600;
-            color: #666;
+            font-weight: 500;
+            color: #888;
         }
         .condition {
-            font-size: 3.5vw;
-            color: #555;
+            font-size: 3vw;
+            color: #666;
             margin-top: 0.3vh;
         }
         .now-icon {
@@ -73,69 +74,75 @@
         .forecast {
             width: 100%;
             display: flex;
-            gap: 1.5vw;
+            gap: 2vw;
+            margin-top: 3vw;
         }
         .forecast-day {
             flex: 1;
             text-align: center;
-            background: #efefef;
-            border-radius: 2.5vw;
-            padding: 1vh 1vw;
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 2vw;
+            padding: 1.5vw 1vw 1.2vw;
         }
         .day-name {
             display: block;
-            font-size: 3.2vw;
+            font-size: 2.8vw;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 0.3vh;
+            color: #555;
+            margin-bottom: 0.5vw;
         }
         .day-icon {
             width: 7vw;
             height: 7vw;
             object-fit: contain;
             display: block;
-            margin: 0 auto 0.3vh;
+            margin: 0 auto 0.5vw;
         }
         .temps {
-            margin-bottom: 0.3vh;
+            margin-bottom: 0.5vw;
         }
         .hi {
             font-size: 4.5vw;
             font-weight: 700;
+            color: #222;
         }
         .lo {
-            font-size: 3.5vw;
-            color: #999;
+            font-size: 3.2vw;
+            color: #aaa;
             margin-left: 0.5vw;
         }
         .detail {
-            font-size: 3vw;
+            font-size: 2.5vw;
             line-height: 1.4;
         }
         .rain {
-            color: #2e7dba;
+            color: #4a90d9;
             font-weight: 600;
             display: block;
         }
         .uv {
-            color: #777;
+            color: #999;
             display: block;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="now">
-            <div class="now-info">
-                <span class="now-label">Now</span>
-                <div class="now-temp-row">
-                    <span class="temp">{{ current_temperature }}</span>
-                    <span class="unit">{{ temperature_unit }}</span>
+        <div>
+            <div class="section-label">Now</div>
+            <div class="now">
+                <div class="now-info">
+                    <div class="now-temp-row">
+                        <span class="temp">{{ current_temperature }}</span>
+                        <span class="unit">{{ temperature_unit }}</span>
+                    </div>
+                    <span class="condition">{{ condition_text }}</span>
                 </div>
-                <span class="condition">{{ condition_text }}</span>
+                <img src="file://{{ weather_icon }}" alt="" class="now-icon">
             </div>
-            <img src="file://{{ weather_icon }}" alt="" class="now-icon">
         </div>
 
         <div class="forecast">

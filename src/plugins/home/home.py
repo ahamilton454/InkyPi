@@ -72,7 +72,7 @@ class Home(BasePlugin):
 
         # Create blank canvas
         width, height = dimensions
-        canvas = Image.new('RGB', (width, height), 'white')
+        canvas = Image.new('RGB', (width, height), '#f8f8f8')
 
         # Define regions
         left_width = width // 2
@@ -168,6 +168,14 @@ class Home(BasePlugin):
         # If no section succeeded, raise an error
         if not any_success:
             raise RuntimeError("Failed to generate any dashboard section. Please check your settings and API keys.")
+
+        # Draw thin divider lines between sections
+        draw = ImageDraw.Draw(canvas)
+        line_color = '#ddd'
+        # Vertical divider between left and right columns
+        draw.line([(left_width, 0), (left_width, height)], fill=line_color, width=1)
+        # Horizontal divider on left side (weather / NASA)
+        draw.line([(0, weather_height), (left_width, weather_height)], fill=line_color, width=1)
 
         logger.info("Dashboard generation complete")
         return canvas
@@ -356,6 +364,21 @@ class Home(BasePlugin):
             # Resize to fit dimensions while maintaining aspect ratio
             image = self.resize_and_crop(image, dimensions)
 
+            # Add subtle gradient overlay at top and bottom edges
+            image = image.convert('RGBA')
+            gradient = Image.new('RGBA', dimensions, (0, 0, 0, 0))
+            gradient_draw = ImageDraw.Draw(gradient)
+            fade_height = dimensions[1] // 6
+            # Top fade
+            for y in range(fade_height):
+                alpha = int(60 * (1 - y / fade_height))
+                gradient_draw.line([(0, y), (dimensions[0], y)], fill=(0, 0, 0, alpha))
+            # Bottom fade
+            for y in range(fade_height):
+                alpha = int(60 * (1 - y / fade_height))
+                gradient_draw.line([(0, dimensions[1] - 1 - y), (dimensions[0], dimensions[1] - 1 - y)], fill=(0, 0, 0, alpha))
+            image = Image.alpha_composite(image, gradient).convert('RGB')
+
         except requests.exceptions.Timeout:
             raise RuntimeError("NASA API request timed out. Check your internet connection.")
         except requests.exceptions.ConnectionError:
@@ -371,36 +394,22 @@ class Home(BasePlugin):
 
     def generate_timestamp_section(self, dimensions, tz, time_format):
         """Generate last updated timestamp section"""
-        width, height = dimensions
-        img = Image.new('RGB', dimensions, 'white')
-        draw = ImageDraw.Draw(img)
-
-        # Get current time
         now = datetime.now(tz)
         if time_format == "24h":
             time_str = now.strftime("%H:%M")
         else:
-            time_str = now.strftime("%I:%M %p")
+            time_str = now.strftime("%-I:%M %p")
 
-        text = f"Last Updated: {time_str}"
+        template_params = {
+            "time_str": time_str,
+        }
 
-        # Try to load a font, fall back to default if not available
-        try:
-            font_size = max(12, height // 3)
-            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", font_size)
-        except:
-            font = ImageFont.load_default()
+        image = self.render_image(dimensions, "timestamp.html", "dashboard.css", template_params)
 
-        # Calculate text position (centered)
-        bbox = draw.textbbox((0, 0), text, font=font)
-        text_width = bbox[2] - bbox[0]
-        text_height = bbox[3] - bbox[1]
-        x = (width - text_width) // 2
-        y = (height - text_height) // 2
+        if not image:
+            raise RuntimeError("Failed to render timestamp section")
 
-        draw.text((x, y), text, fill='black', font=font)
-
-        return img
+        return image
 
     def generate_error_section(self, dimensions, section_name, error_message):
         """Generate an error display section with red text"""

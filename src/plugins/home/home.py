@@ -274,36 +274,41 @@ class Home(BasePlugin):
         return image
 
     def generate_calendar_section(self, calendar_url, dimensions, tz, time_format, settings):
-        """Generate calendar agenda section for tomorrow"""
-        # Fetch and parse calendar
+        """Generate calendar agenda section. Shows today (midnight-7pm) or tomorrow (7pm-midnight)."""
         events = self.fetch_calendar_events(calendar_url, tz)
 
-        # Filter for tomorrow's events
-        tomorrow_events = self.filter_tomorrow_events(events, tz)
+        now = datetime.now(tz)
+        current_hour = now.hour
 
-        # Format events for display
+        # Midnight-7pm: show today. 7pm-midnight: show tomorrow.
+        if current_hour < 19:
+            target_date = now
+            showing_today = True
+        else:
+            target_date = now + timedelta(days=1)
+            showing_today = False
+
+        filtered_events = self.filter_day_events(events, tz, target_date)
+
         formatted_events = []
-        for event in tomorrow_events[:10]:  # Limit to 10 events
-            formatted_event = {
+        for event in filtered_events[:10]:
+            formatted_events.append({
                 "time": event.get("time", ""),
                 "title": event.get("title", ""),
                 "all_day": event.get("all_day", False)
-            }
-            formatted_events.append(formatted_event)
+            })
 
-        # Get tomorrow's date
-        tomorrow = datetime.now(tz) + timedelta(days=1)
-        date_str = tomorrow.strftime("%A, %B %d")
+        date_str = target_date.strftime("%A, %B %d")
+        label = "Today" if showing_today else "Tomorrow"
 
-        # Prepare template parameters
         template_params = {
             "date": date_str,
+            "label": label,
             "events": formatted_events,
             "time_format": time_format,
             "calendar_color": settings.get('calendarColor', '#4285f4')
         }
 
-        # Render HTML template
         image = self.render_image(dimensions, "calendar_compact.html", "dashboard.css", template_params)
 
         if not image:
@@ -631,32 +636,33 @@ class Home(BasePlugin):
             logger.error(f"Failed to fetch calendar: {str(e)}")
             raise RuntimeError(f"Calendar fetch error: {str(e)}")
 
-    def filter_tomorrow_events(self, events, tz):
-        """Filter events for tomorrow only"""
-        tomorrow_start = datetime.now(tz) + timedelta(days=1)
-        tomorrow_start = tomorrow_start.replace(hour=0, minute=0, second=0, microsecond=0)
-        tomorrow_end = tomorrow_start + timedelta(days=1)
+    def filter_day_events(self, events, tz, target_date):
+        """Filter events for a specific day"""
+        if isinstance(target_date, datetime):
+            day_start = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
+        else:
+            day_start = datetime.combine(target_date, datetime.min.time())
+            day_start = tz.localize(day_start)
+        day_end = day_start + timedelta(days=1)
 
-        tomorrow_events = []
+        day_events = []
         for event in events:
             event_dt = event["datetime"]
-            if tomorrow_start <= event_dt < tomorrow_end:
-                # Format time string
+            if day_start <= event_dt < day_end:
                 if event["all_day"]:
                     time_str = "All Day"
                 else:
                     time_str = event_dt.strftime("%I:%M %p").lstrip("0")
 
-                tomorrow_events.append({
+                day_events.append({
                     "time": time_str,
                     "title": event["title"],
                     "all_day": event["all_day"]
                 })
 
-        # Sort by time
-        tomorrow_events.sort(key=lambda x: (x["all_day"], x["time"]))
+        day_events.sort(key=lambda x: (not x["all_day"], x["time"]))
 
-        return tomorrow_events
+        return day_events
 
     def resize_and_crop(self, image, target_size):
         """Resize and crop image to fit target size while maintaining aspect ratio"""

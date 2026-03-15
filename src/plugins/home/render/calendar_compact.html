@@ -4,26 +4,130 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            color: #000;
+            background: #fff;
+            overflow: hidden;
+            width: 400px;
+            height: 420px;
+            padding: 14px 16px;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid {{ calendar_color }};
+        }
+        .label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: {{ calendar_color }};
+            margin-bottom: 2px;
+        }
+        .date {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000;
+        }
+        .events {
+            flex: 1;
+            overflow: hidden;
+        }
+        .event {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 7px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .event:last-child {
+            border-bottom: none;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: {{ calendar_color }};
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+        .event-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .event-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #000;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .event-time {
+            font-size: 12px;
+            color: #777;
+            font-weight: 500;
+        }
+        .empty {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #bbb;
+        }
+        .empty-icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+        .empty-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: #aaa;
+        }
+        .empty-sub {
+            font-size: 12px;
+            color: #ccc;
+            margin-top: 4px;
+        }
+    </style>
 </head>
-<body class="calendar-section">
-    <div class="calendar-container">
-        <div class="calendar-header">
-            <h2 class="calendar-title">{{ date }}</h2>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="label">{{ label }}</div>
+            <div class="date">{{ date }}</div>
         </div>
 
-        <div class="events-list">
-            {% if events %}
-                {% for event in events %}
-                <div class="event-item">
-                    <div class="event-time">{{ event.time }}</div>
+        {% if events %}
+        <div class="events">
+            {% for event in events %}
+            <div class="event">
+                <div class="dot"></div>
+                <div class="event-info">
                     <div class="event-title">{{ event.title }}</div>
+                    <div class="event-time">{{ event.time }}</div>
                 </div>
-                {% endfor %}
-            {% else %}
-                <div class="no-events">No events scheduled</div>
-            {% endif %}
+            </div>
+            {% endfor %}
         </div>
+        {% else %}
+        <div class="empty">
+            <div class="empty-icon">&#9786;</div>
+            <div class="empty-text">Nothing planned</div>
+            <div class="empty-sub">Enjoy your free time</div>
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>

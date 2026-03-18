@@ -2,16 +2,12 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
 <div class="form-group">
-    <label class="form-label">Calendar ICS URL:</label>
-    <input type="text" id="calendarURL" name="calendarURL" class="form-input" placeholder="https://calendar.google.com/calendar/ical/..." />
+    <label class="form-label">Calendars:</label>
+    <div id="calendarList"></div>
+    <button type="button" class="action-button compact" onclick="addCalendarInput('', '#4285f4')">+ Add Calendar</button>
     <small style="color: #666; display: block; margin-top: 4px;">
-        Get this from Google Calendar → Settings → Integrate calendar → "Secret address in iCal format"
+        Get ICS URLs from Google Calendar → Settings → Integrate calendar → "Secret address in iCal format"
     </small>
-</div>
-
-<div class="form-group">
-    <label class="form-label">Calendar Color:</label>
-    <input type="color" id="calendarColor" name="calendarColor" class="color-picker" value="#4285f4">
 </div>
 
 <div class="form-group">
@@ -108,24 +104,68 @@
         setTimeout(() => map.invalidateSize(), 100);
     });
 
+    // Dynamic calendar list
+    function addCalendarInput(url = '', color = '#4285f4') {
+        const calendarList = document.getElementById('calendarList');
+
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('calendar-entry', 'form-group');
+        wrapper.style.cssText = 'display: flex; gap: 8px; align-items: center; margin-bottom: 8px;';
+
+        const colorInput = document.createElement('input');
+        colorInput.type = 'color';
+        colorInput.name = 'calendarColors[]';
+        colorInput.classList.add('color-picker');
+        colorInput.value = color;
+
+        const urlInput = document.createElement('input');
+        urlInput.type = 'text';
+        urlInput.name = 'calendarURLs[]';
+        urlInput.placeholder = 'Calendar ICS URL';
+        urlInput.classList.add('form-input');
+        urlInput.value = url;
+        urlInput.style.flex = '1';
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.innerText = '✕';
+        removeBtn.classList.add('remove-btn');
+        removeBtn.onclick = () => wrapper.remove();
+
+        wrapper.appendChild(colorInput);
+        wrapper.appendChild(urlInput);
+        wrapper.appendChild(removeBtn);
+        calendarList.appendChild(wrapper);
+    }
+
     // Load saved settings
     document.addEventListener('DOMContentLoaded', () => {
         if (loadPluginSettings && pluginSettings) {
-            const $calendarURL = document.getElementById('calendarURL');
-            const $calendarColor = document.getElementById('calendarColor');
             const $latitude = document.getElementById('latitude');
             const $longitude = document.getElementById('longitude');
             const $units = document.getElementById('units');
             const $randomizeApod = document.getElementById('randomizeApod');
 
-            if (pluginSettings.calendarURL) $calendarURL.value = pluginSettings.calendarURL;
-            if (pluginSettings.calendarColor) $calendarColor.value = pluginSettings.calendarColor;
+            // Load calendars (with backwards compatibility for single URL)
+            let calendars = [{ url: '', color: '#4285f4' }];
+            if (pluginSettings["calendarURLs[]"]) {
+                calendars = pluginSettings["calendarURLs[]"].map((url, i) => ({
+                    url: url || '',
+                    color: pluginSettings["calendarColors[]"][i] || '#4285f4'
+                }));
+            } else if (pluginSettings.calendarURL) {
+                calendars = [{ url: pluginSettings.calendarURL, color: pluginSettings.calendarColor || '#4285f4' }];
+            }
+            calendars.forEach(({ url, color }) => addCalendarInput(url, color));
+
             if (pluginSettings.latitude) $latitude.value = pluginSettings.latitude;
             if (pluginSettings.longitude) $longitude.value = pluginSettings.longitude;
             if (pluginSettings.units) $units.value = pluginSettings.units;
 
             $randomizeApod.checked = pluginSettings.randomizeApod === 'true';
             $randomizeApod.value = pluginSettings.randomizeApod || 'false';
+        } else {
+            addCalendarInput('', '#4285f4');
         }
     });
 </script>

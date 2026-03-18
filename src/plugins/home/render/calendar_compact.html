@@ -26,7 +26,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: {{ calendar_color }};
+            color: #4285f4;
             margin-bottom: 0.5vh;
         }
         .header {
@@ -57,7 +57,7 @@
             width: 2.5vw;
             height: 2.5vw;
             border-radius: 50%;
-            background: {{ calendar_color }};
+            background: #4285f4;
             margin-top: 1vh;
             flex-shrink: 0;
         }
@@ -113,7 +113,7 @@
         <div class="events">
             {% for event in events %}
             <div class="event">
-                <div class="dot"></div>
+                <div class="dot" style="background: {{ event.color }};"></div>
                 <div class="event-info">
                     <div class="event-title">{{ event.title }}</div>
                     <div class="event-time">{{ event.time }}</div>

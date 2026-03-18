@@ -131,12 +131,19 @@ class Home(BasePlugin):
         # 3. Generate calendar section (right side top: 400x420)
         logger.info("Fetching calendar events...")
         try:
-            calendar_url = settings.get('calendarURL')
-            if not calendar_url:
-                raise RuntimeError("Calendar URL not configured. Please add your Google Calendar ICS URL in settings.")
+            calendar_urls = settings.get('calendarURLs[]')
+            calendar_colors = settings.get('calendarColors[]')
+
+            # Backwards compatibility for old single-URL setting
+            if not calendar_urls:
+                single_url = settings.get('calendarURL')
+                if not single_url:
+                    raise RuntimeError("Calendar URL not configured. Please add your Google Calendar ICS URL in settings.")
+                calendar_urls = [single_url]
+                calendar_colors = [settings.get('calendarColor', '#4285f4')]
 
             calendar_img = self.generate_calendar_section(
-                calendar_url, (right_width, calendar_height), tz, time_format, settings
+                calendar_urls, calendar_colors, (right_width, calendar_height), tz, time_format
             )
             canvas.paste(calendar_img, (left_width, 0))
             any_success = True
@@ -280,9 +287,18 @@ class Home(BasePlugin):
 
         return image
 
-    def generate_calendar_section(self, calendar_url, dimensions, tz, time_format, settings):
+    def generate_calendar_section(self, calendar_urls, calendar_colors, dimensions, tz, time_format):
         """Generate calendar agenda section. Shows today (midnight-7pm) or tomorrow (7pm-midnight)."""
-        events = self.fetch_calendar_events(calendar_url, tz)
+        # Fetch events from all calendars, tagging each with its color
+        all_events = []
+        for url, color in zip(calendar_urls, calendar_colors):
+            try:
+                events = self.fetch_calendar_events(url, tz)
+                for event in events:
+                    event['color'] = color
+                all_events.extend(events)
+            except Exception as e:
+                logger.warning(f"Failed to fetch calendar {url}: {e}")
 
         now = datetime.now(tz)
         current_hour = now.hour
@@ -295,14 +311,15 @@ class Home(BasePlugin):
             target_date = now + timedelta(days=1)
             showing_today = False
 
-        filtered_events = self.filter_day_events(events, tz, target_date)
+        filtered_events = self.filter_day_events(all_events, tz, target_date)
 
         formatted_events = []
         for event in filtered_events[:10]:
             formatted_events.append({
                 "time": event.get("time", ""),
                 "title": event.get("title", ""),
-                "all_day": event.get("all_day", False)
+                "all_day": event.get("all_day", False),
+                "color": event.get("color", "#4285f4")
             })
 
         date_str = target_date.strftime("%A, %B %d")
@@ -313,7 +330,6 @@ class Home(BasePlugin):
             "label": label,
             "events": formatted_events,
             "time_format": time_format,
-            "calendar_color": settings.get('calendarColor', '#4285f4')
         }
 
         image = self.render_image(dimensions, "calendar_compact.html", "dashboard.css", template_params)
@@ -666,7 +682,8 @@ class Home(BasePlugin):
                 day_events.append({
                     "time": time_str,
                     "title": event["title"],
-                    "all_day": event["all_day"]
+                    "all_day": event["all_day"],
+                    "color": event.get("color", "#4285f4")
                 })
 
         day_events.sort(key=lambda x: (not x["all_day"], x["time"]))

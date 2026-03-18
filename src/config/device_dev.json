@@ -40,8 +40,14 @@
                         "plugin_id": "home",
                         "name": "Home",
                         "plugin_settings": {
-                            "calendarURL": "https://calendar.google.com/calendar/ical/ahamilton454%40gmail.com/private-96837b61a340fe5f65bc083dba2f7923/basic.ics",
-                            "calendarColor": "#4285f4",
+                            "calendarColors[]": [
+                                "#4285f4",
+                                "#df43f4"
+                            ],
+                            "calendarURLs[]": [
+                                "https://calendar.google.com/calendar/ical/ahamilton454%40gmail.com/private-96837b61a340fe5f65bc083dba2f7923/basic.ics",
+                                "https://calendar.google.com/calendar/ical/andrew%40sandgarden.com/public/basic.ics"
+                            ],
                             "latitude": "40.704587",
                             "longitude": "-73.947601",
                             "units": "imperial"
@@ -49,17 +55,17 @@
                         "refresh": {
                             "interval": 3600
                         },
-                        "latest_refresh_time": "2026-03-15T21:12:57.630704+00:00"
+                        "latest_refresh_time": "2026-03-17T20:18:42.357817+00:00"
                     }
                 ],
-                "current_plugin_index": null
+                "current_plugin_index": 0
             }
         ],
-        "active_playlist": null
+        "active_playlist": "Default"
     },
     "refresh_info": {
-        "refresh_time": "2026-03-15T21:12:57.630704+00:00",
-        "image_hash": "96de2ae5fad80ab9d2a473426ccc98fd01f2dca3ba1f7dd3ac4027a3fd93f229",
+        "refresh_time": "2026-03-17T20:18:42.357817+00:00",
+        "image_hash": "8273180068fd8e2b6fa7d26cea9f38fb5f68bad887c45e933e962b51faf26d09",
         "refresh_type": "Playlist",
         "plugin_id": "home",
         "playlist": "Default",

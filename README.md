@@ -48,6 +48,58 @@ See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-m
 
 **Disclosure:** The links above are affiliate links. I may earn a commission from qualifying purchases made through them, at no extra cost to you, which helps maintain and develop this project.
 
+## Display Compatibility (Example / Testing Section)
+
+This section is primarily for testing GitHub rich diffs and table rendering. It summarizes the displays mentioned above and can be safely ignored for normal setup and usage.
+
+### Display support matrix
+
+| Display Family           | Model / Size | Color Mode            | Vendor    | Notes                                                                                           |
+|--------------------------|-------------|-----------------------|-----------|-------------------------------------------------------------------------------------------------|
+| Inky Impression          | 13.3"       | Color e‑paper         | Pimoroni  | Large panel suitable for wall‑mounted dashboards and calendars.                                |
+| Inky Impression          | 7.3"        | Color e‑paper         | Pimoroni  | Good balance of size and readability for desks or smaller frames.                              |
+| Inky Impression          | 5.7"        | Color e‑paper         | Pimoroni  | Compact, works well for focused widgets such as weather or a single calendar view.             |
+| Inky Impression          | 4"          | Color e‑paper         | Pimoroni  | Smallest Impression option; ideal for simple clock or status displays.                         |
+| Inky wHAT                | 4.2"        | Monochrome / tri‑color| Pimoroni  | Classic e‑paper HAT form factor for Raspberry Pi projects.                                     |
+| Waveshare Spectra 6 (E6) | 4"          | Full‑color e‑paper    | Waveshare | Supported Spectra 6 series; smaller than 4" is not recommended for InkyPi layouts.            |
+| Waveshare Spectra 6 (E6) | 7.3"        | Full‑color e‑paper    | Waveshare | Example target for multi‑panel dashboards.                                                     |
+| Waveshare Spectra 6 (E6) | 13.3"       | Full‑color e‑paper    | Waveshare | Large format panel, similar in size to the Inky Impression 13.3".                             |
+| Waveshare Black & White  | 7.5"        | Black & white e‑paper | Waveshare | Recommended for simple, high‑contrast layouts.                                                 |
+| Waveshare Black & White  | 13.3"       | Black & white e‑paper | Waveshare | Large monochrome panel for text‑heavy or high‑contrast dashboards.                             |
+| Waveshare (general)      | < 4"        | Any                   | Waveshare | Screens smaller than 4" are **not recommended** for InkyPi due to limited resolution.         |
+| Waveshare (IT8951)       | Any         | Any                   | Waveshare | **Not supported** by InkyPi (see Waveshare Display Support section below for more details).    |
+
+### Example: Display update notes (for diff testing)
+
+The text below is an example block, inspired by release‑note style updates, so that changes are easy to spot in rich diffs.
+
+--
+title: "Display support update (example only)"
+--
+This example section highlights how InkyPi documentation might describe improvements to display support, layout options, and configuration workflows.
+
+#### Example display feature waitlist
+
+| Display / Setup               | Panel Size | Use Case Focus         | Feature Waiting On                       | Primary Device      | Status             |
+|------------------------------|-----------:|------------------------|------------------------------------------|---------------------|--------------------|
+| Inky Impression "Dashboard"  |    13.3"  | Wall calendar & agenda | Advanced calendar layout presets         | Raspberry Pi 4      | Planned            |
+| Waveshare Spectra 6 "Status"|     7.3"  | System status board    | Multi‑widget layout with plugin zones    | Raspberry Pi 3 / 4  | In design          |
+| Inky wHAT "Desk Clock"       |     4.2"  | Desk clock + weather   | Combined clock + weather sample template | Raspberry Pi Zero 2 | Under discussion   |
+
+#### 🔥 Example feature highlights
+
+- **Layouts:** Adds example modular layouts tuned for 7.3" and 13.3" displays to show how different plugins can be combined.
+- **Playlists:** Demonstrates scheduled playlists that rotate between a clock, calendar, and weather view during the day.
+- **Configuration:** Shows an example flow for switching between Inky and Waveshare displays without a full reinstall.
+- **Docs:** Includes richer tables and formatted sections (like this one) purely for testing README diffs.
+
+#### 🛡️ Example stability & compatibility notes
+
+- **Waveshare drivers:** Reminds readers to use the `-W <waveshare device model>` flag during installation for supported Waveshare panels.
+- **Unsupported controllers:** Calls out that IT8951‑based panels are not supported, matching the guidance in the Waveshare Display Support section.
+- **Small panels:** Reiterates that screens smaller than 4 inches are not recommended for InkyPi because of limited resolution.
+
+
 ## Installation
 To install InkyPi, follow these steps:
 

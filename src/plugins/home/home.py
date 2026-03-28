@@ -6,6 +6,15 @@ Displays a composite layout with weather, calendar, NASA APOD, and timestamp
 from plugins.base_plugin.base_plugin import BasePlugin
 from PIL import Image, ImageDraw, ImageFont
 from utils.app_utils import resolve_path
+from utils.ical_event_times import (
+    DEFAULT_TIMED_DURATION,
+    clip_interval_to_day,
+    format_time_range,
+    hour_ticks,
+    layout_timeline_blocks,
+    parse_event_interval,
+    timeline_window_for_day,
+)
 import requests
 import logging
 from datetime import datetime, timedelta, timezone
@@ -19,41 +28,66 @@ from random import randint
 
 logger = logging.getLogger(__name__)
 
+
+def sort_calendar_agenda_rows(rows):
+    """
+    Order agenda rows for one day: timed events first (chronological), then all-day
+    (by start instant, then title). Each row must have keys: all_day (bool),
+    sort_dt (timezone-aware datetime), title (str).
+    """
+    return sorted(rows, key=lambda x: (x["all_day"], x["sort_dt"], x["title"]))
+
+
 # Open-Meteo API URLs (Free, no API key needed!)
 OPEN_METEO_FORECAST_URL = "https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&hourly=temperature_2m,weathercode,precipitation_probability&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset&current_weather=true&timezone=auto&forecast_days=3"
 
 # Weather code to human-readable description
 WEATHER_DESCRIPTIONS = {
-    0: "Clear", 1: "Mostly Clear", 2: "Partly Cloudy", 3: "Overcast",
-    45: "Foggy", 48: "Icy Fog",
-    51: "Light Drizzle", 53: "Drizzle", 55: "Heavy Drizzle",
-    56: "Freezing Drizzle", 57: "Heavy Freezing Drizzle",
-    61: "Light Rain", 63: "Rain", 65: "Heavy Rain",
-    66: "Freezing Rain", 67: "Heavy Freezing Rain",
-    71: "Light Snow", 73: "Snow", 75: "Heavy Snow",
-    77: "Snow Grains", 80: "Light Showers", 81: "Showers", 82: "Heavy Showers",
-    85: "Light Snow Showers", 86: "Heavy Snow Showers",
-    95: "Thunderstorm", 96: "Thunderstorm w/ Hail", 99: "Heavy Thunderstorm",
+    0: "Clear",
+    1: "Mostly Clear",
+    2: "Partly Cloudy",
+    3: "Overcast",
+    45: "Foggy",
+    48: "Icy Fog",
+    51: "Light Drizzle",
+    53: "Drizzle",
+    55: "Heavy Drizzle",
+    56: "Freezing Drizzle",
+    57: "Heavy Freezing Drizzle",
+    61: "Light Rain",
+    63: "Rain",
+    65: "Heavy Rain",
+    66: "Freezing Rain",
+    67: "Heavy Freezing Rain",
+    71: "Light Snow",
+    73: "Snow",
+    75: "Heavy Snow",
+    77: "Snow Grains",
+    80: "Light Showers",
+    81: "Showers",
+    82: "Heavy Showers",
+    85: "Light Snow Showers",
+    86: "Heavy Snow Showers",
+    95: "Thunderstorm",
+    96: "Thunderstorm w/ Hail",
+    99: "Heavy Thunderstorm",
 }
 OPEN_METEO_AIR_QUALITY_URL = "https://air-quality-api.open-meteo.com/v1/air-quality?latitude={lat}&longitude={long}&hourly=uv_index&timezone=auto&forecast_days=3"
 OPEN_METEO_UNIT_PARAMS = {
     "metric": "temperature_unit=celsius&wind_speed_unit=ms",
-    "imperial": "temperature_unit=fahrenheit&wind_speed_unit=mph"
+    "imperial": "temperature_unit=fahrenheit&wind_speed_unit=mph",
 }
 
-UNITS = {
-    "metric": {"temperature": "°C"},
-    "imperial": {"temperature": "°F"}
-}
+UNITS = {"metric": {"temperature": "°C"}, "imperial": {"temperature": "°F"}}
 
 
 class Home(BasePlugin):
     def generate_settings_template(self):
         template_params = super().generate_settings_template()
-        template_params['api_key'] = {
+        template_params["api_key"] = {
             "required": True,
             "service": "NASA",
-            "expected_key": "NASA_SECRET"
+            "expected_key": "NASA_SECRET",
         }
         return template_params
 
@@ -72,7 +106,7 @@ class Home(BasePlugin):
 
         # Create blank canvas
         width, height = dimensions
-        canvas = Image.new('RGB', (width, height), '#f8f8f8')
+        canvas = Image.new("RGB", (width, height), "#f8f8f8")
 
         # Define regions
         left_width = width // 2
@@ -88,13 +122,15 @@ class Home(BasePlugin):
         # 1. Generate weather section (top left: 400x240)
         logger.info("Fetching weather data...")
         try:
-            lat = settings.get('latitude')
-            long = settings.get('longitude')
+            lat = settings.get("latitude")
+            long = settings.get("longitude")
             if not lat or not long:
-                raise RuntimeError("Location not configured. Please set latitude and longitude in settings.")
+                raise RuntimeError(
+                    "Location not configured. Please set latitude and longitude in settings."
+                )
 
-            units = settings.get('units', 'metric')
-            if units not in ['metric', 'imperial']:
+            units = settings.get("units", "metric")
+            if units not in ["metric", "imperial"]:
                 raise RuntimeError("Invalid temperature units.")
 
             weather_img = self.generate_weather_section(
@@ -131,19 +167,25 @@ class Home(BasePlugin):
         # 3. Generate calendar section (right side top: 400x420)
         logger.info("Fetching calendar events...")
         try:
-            calendar_urls = settings.get('calendarURLs[]')
-            calendar_colors = settings.get('calendarColors[]')
+            calendar_urls = settings.get("calendarURLs[]")
+            calendar_colors = settings.get("calendarColors[]")
 
             # Backwards compatibility for old single-URL setting
             if not calendar_urls:
-                single_url = settings.get('calendarURL')
+                single_url = settings.get("calendarURL")
                 if not single_url:
-                    raise RuntimeError("Calendar URL not configured. Please add your Google Calendar ICS URL in settings.")
+                    raise RuntimeError(
+                        "Calendar URL not configured. Please add your Google Calendar ICS URL in settings."
+                    )
                 calendar_urls = [single_url]
-                calendar_colors = [settings.get('calendarColor', '#4285f4')]
+                calendar_colors = [settings.get("calendarColor", "#4285f4")]
 
             calendar_img = self.generate_calendar_section(
-                calendar_urls, calendar_colors, (right_width, calendar_height), tz, time_format
+                calendar_urls,
+                calendar_colors,
+                (right_width, calendar_height),
+                tz,
+                time_format,
             )
             canvas.paste(calendar_img, (left_width, 0))
             any_success = True
@@ -174,15 +216,21 @@ class Home(BasePlugin):
 
         # If no section succeeded, raise an error
         if not any_success:
-            raise RuntimeError("Failed to generate any dashboard section. Please check your settings and API keys.")
+            raise RuntimeError(
+                "Failed to generate any dashboard section. Please check your settings and API keys."
+            )
 
         # Draw divider lines between sections
         draw = ImageDraw.Draw(canvas)
-        line_color = '#999'
+        line_color = "#999"
         # Vertical divider between left and right columns
         draw.line([(left_width, 0), (left_width, height)], fill=line_color, width=2)
         # Horizontal divider on left side (weather / NASA)
-        draw.line([(0, weather_height), (left_width, weather_height)], fill=line_color, width=2)
+        draw.line(
+            [(0, weather_height), (left_width, weather_height)],
+            fill=line_color,
+            width=2,
+        )
 
         logger.info("Dashboard generation complete")
         return canvas
@@ -242,7 +290,9 @@ class Home(BasePlugin):
         if hours_checked > 0 and daily_precip:
             precip_today = round(daily_precip[0]) if daily_precip else 0
             today_high = round(daily_highs[0]) if daily_highs else "--"
-            today_desc = WEATHER_DESCRIPTIONS.get(daily_codes[0] if daily_codes else 0, "")
+            today_desc = WEATHER_DESCRIPTIONS.get(
+                daily_codes[0] if daily_codes else 0, ""
+            )
             if precip_today >= 50:
                 today_outlook = f"{today_desc}, high {today_high}°. Rain likely."
             elif precip_today >= 20:
@@ -260,14 +310,18 @@ class Home(BasePlugin):
 
         forecast_days = []
         for i in range(min(3, len(daily_dates))):
-            forecast_days.append({
-                "name": day_names[i] if i < len(day_names) else "",
-                "icon": self.get_weather_icon(daily_codes[i] if i < len(daily_codes) else 0),
-                "high": round(daily_highs[i]) if i < len(daily_highs) else "--",
-                "low": round(daily_lows[i]) if i < len(daily_lows) else "--",
-                "rain": round(daily_precip[i]) if i < len(daily_precip) else 0,
-                "uv": uv_by_day[i] if i < len(uv_by_day) else 0,
-            })
+            forecast_days.append(
+                {
+                    "name": day_names[i] if i < len(day_names) else "",
+                    "icon": self.get_weather_icon(
+                        daily_codes[i] if i < len(daily_codes) else 0
+                    ),
+                    "high": round(daily_highs[i]) if i < len(daily_highs) else "--",
+                    "low": round(daily_lows[i]) if i < len(daily_lows) else "--",
+                    "rain": round(daily_precip[i]) if i < len(daily_precip) else 0,
+                    "uv": uv_by_day[i] if i < len(uv_by_day) else 0,
+                }
+            )
 
         temp_unit = UNITS[units]["temperature"]
 
@@ -280,14 +334,18 @@ class Home(BasePlugin):
             "forecast_days": forecast_days,
         }
 
-        image = self.render_image(dimensions, "weather_compact.html", "dashboard.css", template_params)
+        image = self.render_image(
+            dimensions, "weather_compact.html", "dashboard.css", template_params
+        )
 
         if not image:
             raise RuntimeError("Failed to render weather section")
 
         return image
 
-    def generate_calendar_section(self, calendar_urls, calendar_colors, dimensions, tz, time_format):
+    def generate_calendar_section(
+        self, calendar_urls, calendar_colors, dimensions, tz, time_format
+    ):
         """Generate calendar agenda section. Shows today (midnight-7pm) or tomorrow (7pm-midnight)."""
         # Fetch events from all calendars, tagging each with its color
         all_events = []
@@ -295,7 +353,7 @@ class Home(BasePlugin):
             try:
                 events = self.fetch_calendar_events(url, tz)
                 for event in events:
-                    event['color'] = color
+                    event["color"] = color
                 all_events.extend(events)
             except Exception as e:
                 logger.warning(f"Failed to fetch calendar {url}: {e}")
@@ -311,16 +369,40 @@ class Home(BasePlugin):
             target_date = now + timedelta(days=1)
             showing_today = False
 
-        filtered_events = self.filter_day_events(all_events, tz, target_date)
+        filtered_events = self.filter_day_events(
+            all_events, tz, target_date, time_format
+        )
+        limited = filtered_events[:10]
 
-        formatted_events = []
-        for event in filtered_events[:10]:
-            formatted_events.append({
-                "time": event.get("time", ""),
-                "title": event.get("title", ""),
-                "all_day": event.get("all_day", False),
-                "color": event.get("color", "#4285f4")
-            })
+        timed_raw = []
+        all_day_events = []
+        for event in limited:
+            if event.get("all_day"):
+                all_day_events.append(
+                    {
+                        "title": event["title"],
+                        "color": event.get("color", "#4285f4"),
+                    }
+                )
+            else:
+                timed_raw.append(event)
+
+        show_all_day_heading = len(timed_raw) > 0 and len(all_day_events) > 0
+
+        if isinstance(target_date, datetime):
+            day_start = target_date.replace(
+                hour=0, minute=0, second=0, microsecond=0
+            )
+        else:
+            day_start = datetime.combine(target_date, datetime.min.time())
+            day_start = tz.localize(day_start)
+
+        window_start, window_end = timeline_window_for_day(day_start, timed_raw)
+        timeline_blocks = layout_timeline_blocks(timed_raw, window_start, window_end)
+        ticks = hour_ticks(window_start, window_end, time_format)
+        hour_slot_count = max(
+            1, int((window_end - window_start).total_seconds() // 3600)
+        )
 
         date_str = target_date.strftime("%A, %B %d")
         label = "Today" if showing_today else "Tomorrow"
@@ -328,11 +410,18 @@ class Home(BasePlugin):
         template_params = {
             "date": date_str,
             "label": label,
-            "events": formatted_events,
+            "timeline_blocks": timeline_blocks,
+            "hour_ticks": ticks,
+            "all_day_events": all_day_events,
+            "show_all_day_heading": show_all_day_heading,
             "time_format": time_format,
+            "has_timed_events": len(timeline_blocks) > 0,
+            "hour_slot_count": hour_slot_count,
         }
 
-        image = self.render_image(dimensions, "calendar_compact.html", "dashboard.css", template_params)
+        image = self.render_image(
+            dimensions, "calendar_compact.html", "dashboard.css", template_params
+        )
 
         if not image:
             raise RuntimeError("Failed to render calendar section")
@@ -343,7 +432,9 @@ class Home(BasePlugin):
         """Generate NASA APOD section"""
         api_key = device_config.load_env_key("NASA_SECRET")
         if not api_key:
-            raise RuntimeError("NASA API Key not configured in .env file. Add NASA_SECRET to your .env file.")
+            raise RuntimeError(
+                "NASA API Key not configured in .env file. Add NASA_SECRET to your .env file."
+            )
 
         params = {"api_key": api_key}
 
@@ -356,10 +447,14 @@ class Home(BasePlugin):
             params["date"] = random_date.strftime("%Y-%m-%d")
 
         try:
-            response = requests.get("https://api.nasa.gov/planetary/apod", params=params, timeout=10)
+            response = requests.get(
+                "https://api.nasa.gov/planetary/apod", params=params, timeout=10
+            )
 
             if response.status_code == 403:
-                raise RuntimeError("Invalid NASA API key. Check your NASA_SECRET in .env file.")
+                raise RuntimeError(
+                    "Invalid NASA API key. Check your NASA_SECRET in .env file."
+                )
             elif response.status_code == 429:
                 raise RuntimeError("NASA API rate limit exceeded. Try again later.")
             elif response.status_code != 200:
@@ -369,7 +464,9 @@ class Home(BasePlugin):
             data = response.json()
 
             if data.get("media_type") != "image":
-                raise RuntimeError("Today's APOD is a video, not an image. Try enabling 'Randomize' in settings.")
+                raise RuntimeError(
+                    "Today's APOD is a video, not an image. Try enabling 'Randomize' in settings."
+                )
 
             image_url = data.get("hdurl") or data.get("url")
 
@@ -381,8 +478,8 @@ class Home(BasePlugin):
             image = self.resize_and_crop(image, dimensions)
 
             # Add subtle gradient overlay at top and bottom edges
-            image = image.convert('RGBA')
-            gradient = Image.new('RGBA', dimensions, (0, 0, 0, 0))
+            image = image.convert("RGBA")
+            gradient = Image.new("RGBA", dimensions, (0, 0, 0, 0))
             gradient_draw = ImageDraw.Draw(gradient)
             fade_height = dimensions[1] // 6
             # Top fade
@@ -392,13 +489,23 @@ class Home(BasePlugin):
             # Bottom fade
             for y in range(fade_height):
                 alpha = int(60 * (1 - y / fade_height))
-                gradient_draw.line([(0, dimensions[1] - 1 - y), (dimensions[0], dimensions[1] - 1 - y)], fill=(0, 0, 0, alpha))
-            image = Image.alpha_composite(image, gradient).convert('RGB')
+                gradient_draw.line(
+                    [
+                        (0, dimensions[1] - 1 - y),
+                        (dimensions[0], dimensions[1] - 1 - y),
+                    ],
+                    fill=(0, 0, 0, alpha),
+                )
+            image = Image.alpha_composite(image, gradient).convert("RGB")
 
         except requests.exceptions.Timeout:
-            raise RuntimeError("NASA API request timed out. Check your internet connection.")
+            raise RuntimeError(
+                "NASA API request timed out. Check your internet connection."
+            )
         except requests.exceptions.ConnectionError:
-            raise RuntimeError("Cannot connect to NASA API. Check your internet connection.")
+            raise RuntimeError(
+                "Cannot connect to NASA API. Check your internet connection."
+            )
         except RuntimeError:
             # Re-raise our custom RuntimeErrors
             raise
@@ -420,7 +527,9 @@ class Home(BasePlugin):
             "time_str": time_str,
         }
 
-        image = self.render_image(dimensions, "timestamp.html", "dashboard.css", template_params)
+        image = self.render_image(
+            dimensions, "timestamp.html", "dashboard.css", template_params
+        )
 
         if not image:
             raise RuntimeError("Failed to render timestamp section")
@@ -430,16 +539,22 @@ class Home(BasePlugin):
     def generate_error_section(self, dimensions, section_name, error_message):
         """Generate an error display section with red text"""
         width, height = dimensions
-        img = Image.new('RGB', dimensions, 'white')
+        img = Image.new("RGB", dimensions, "white")
         draw = ImageDraw.Draw(img)
 
         # Add a light red background
-        draw.rectangle([(0, 0), (width, height)], fill='#ffe6e6', outline='#ff0000', width=2)
+        draw.rectangle(
+            [(0, 0), (width, height)], fill="#ffe6e6", outline="#ff0000", width=2
+        )
 
         # Try to load fonts
         try:
-            title_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 18)
-            error_font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 12)
+            title_font = ImageFont.truetype(
+                "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", 18
+            )
+            error_font = ImageFont.truetype(
+                "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 12
+            )
         except:
             title_font = ImageFont.load_default()
             error_font = ImageFont.load_default()
@@ -450,7 +565,7 @@ class Home(BasePlugin):
         y_pos = padding
 
         # Draw title
-        draw.text((padding, y_pos), title_text, fill='#cc0000', font=title_font)
+        draw.text((padding, y_pos), title_text, fill="#cc0000", font=title_font)
         y_pos += 30
 
         # Draw error message with word wrapping
@@ -463,12 +578,12 @@ class Home(BasePlugin):
 
         for word in words:
             current_line.append(word)
-            test_line = ' '.join(current_line)
+            test_line = " ".join(current_line)
             bbox = draw.textbbox((0, 0), test_line, font=error_font)
             if bbox[2] - bbox[0] > max_width:
                 if len(current_line) > 1:
                     current_line.pop()
-                    lines.append(' '.join(current_line))
+                    lines.append(" ".join(current_line))
                     current_line = [word]
                 else:
                     # Word is too long, add it anyway
@@ -476,11 +591,11 @@ class Home(BasePlugin):
                     current_line = []
 
         if current_line:
-            lines.append(' '.join(current_line))
+            lines.append(" ".join(current_line))
 
         # Draw each line
         for line in lines[:8]:  # Limit to 8 lines to prevent overflow
-            draw.text((padding, y_pos), line, fill='#990000', font=error_font)
+            draw.text((padding, y_pos), line, fill="#990000", font=error_font)
             y_pos += 18
 
         return img
@@ -490,19 +605,29 @@ class Home(BasePlugin):
     def get_open_meteo_data(self, lat, long, units):
         """Fetch weather data from Open-Meteo"""
         try:
-            unit_params = OPEN_METEO_UNIT_PARAMS.get(units, OPEN_METEO_UNIT_PARAMS["metric"])
+            unit_params = OPEN_METEO_UNIT_PARAMS.get(
+                units, OPEN_METEO_UNIT_PARAMS["metric"]
+            )
             url = OPEN_METEO_FORECAST_URL.format(lat=lat, long=long) + f"&{unit_params}"
             response = requests.get(url, timeout=10)
 
             if not 200 <= response.status_code < 300:
-                logger.error(f"Open-Meteo API returned status {response.status_code}: {response.content}")
-                raise RuntimeError(f"Open-Meteo API error (status {response.status_code}). Check your location coordinates.")
+                logger.error(
+                    f"Open-Meteo API returned status {response.status_code}: {response.content}"
+                )
+                raise RuntimeError(
+                    f"Open-Meteo API error (status {response.status_code}). Check your location coordinates."
+                )
 
             return response.json()
         except requests.exceptions.Timeout:
-            raise RuntimeError("Open-Meteo API request timed out. Check your internet connection.")
+            raise RuntimeError(
+                "Open-Meteo API request timed out. Check your internet connection."
+            )
         except requests.exceptions.ConnectionError:
-            raise RuntimeError("Cannot connect to Open-Meteo API. Check your internet connection.")
+            raise RuntimeError(
+                "Cannot connect to Open-Meteo API. Check your internet connection."
+            )
         except RuntimeError:
             # Re-raise our custom RuntimeErrors
             raise
@@ -516,8 +641,12 @@ class Home(BasePlugin):
             response = requests.get(url, timeout=10)
 
             if not 200 <= response.status_code < 300:
-                logger.error(f"Open-Meteo UV API returned status {response.status_code}: {response.content}")
-                raise RuntimeError(f"UV data API error (status {response.status_code}).")
+                logger.error(
+                    f"Open-Meteo UV API returned status {response.status_code}: {response.content}"
+                )
+                raise RuntimeError(
+                    f"UV data API error (status {response.status_code})."
+                )
 
             return response.json()
         except requests.exceptions.Timeout:
@@ -537,9 +666,9 @@ class Home(BasePlugin):
 
     def parse_uv_index_multi(self, uv_data, tz, num_days):
         """Parse max UV index for multiple days"""
-        hourly_data = uv_data.get('hourly', {})
-        times = hourly_data.get('time', [])
-        uv_values = hourly_data.get('uv_index', [])
+        hourly_data = uv_data.get("hourly", {})
+        times = hourly_data.get("time", [])
+        uv_values = hourly_data.get("uv_index", [])
 
         current_time = datetime.now(tz)
         day_maxes = [0] * num_days
@@ -563,10 +692,10 @@ class Home(BasePlugin):
         """Map weather code to icon path, with day/night variants"""
         suffix = "n" if is_night else "d"
         icon_map = {
-            0: "01",   # Clear
-            1: "02",   # Mainly clear
-            2: "03",   # Partly cloudy
-            3: "04",   # Overcast
+            0: "01",  # Clear
+            1: "02",  # Mainly clear
+            2: "03",  # Partly cloudy
+            3: "04",  # Overcast
             45: "50",  # Fog
             48: "50",  # Fog
             51: "09",  # Drizzle
@@ -605,18 +734,26 @@ class Home(BasePlugin):
             response = requests.get(calendar_url, timeout=10)
 
             if response.status_code == 404:
-                raise RuntimeError("Calendar URL not found (404). Check that the URL is correct.")
+                raise RuntimeError(
+                    "Calendar URL not found (404). Check that the URL is correct."
+                )
             elif response.status_code == 403:
-                raise RuntimeError("Access denied to calendar (403). Make sure the calendar is shared/public.")
+                raise RuntimeError(
+                    "Access denied to calendar (403). Make sure the calendar is shared/public."
+                )
             elif response.status_code != 200:
-                raise RuntimeError(f"Calendar API error (status {response.status_code}).")
+                raise RuntimeError(
+                    f"Calendar API error (status {response.status_code})."
+                )
 
             response.raise_for_status()
 
             try:
                 cal = icalendar.Calendar.from_ical(response.text)
             except Exception as e:
-                raise RuntimeError(f"Invalid calendar format. Make sure the URL is a valid ICS/iCal URL: {str(e)}")
+                raise RuntimeError(
+                    f"Invalid calendar format. Make sure the URL is a valid ICS/iCal URL: {str(e)}"
+                )
 
             # Get events for the next 2 days
             start = datetime.now(tz)
@@ -628,22 +765,15 @@ class Home(BasePlugin):
             for event in events:
                 try:
                     title = str(event.get("summary", "No Title"))
-                    dtstart = event.decoded("dtstart")
-
-                    all_day = False
-                    if isinstance(dtstart, datetime):
-                        event_dt = dtstart.astimezone(tz)
-                    else:
-                        # It's a date object (all-day event)
-                        event_dt = datetime.combine(dtstart, datetime.min.time())
-                        event_dt = tz.localize(event_dt)
-                        all_day = True
-
-                    parsed_events.append({
-                        "title": title,
-                        "datetime": event_dt,
-                        "all_day": all_day
-                    })
+                    start_dt, end_dt, all_day = parse_event_interval(event, tz)
+                    parsed_events.append(
+                        {
+                            "title": title,
+                            "datetime": start_dt,
+                            "end_datetime": end_dt,
+                            "all_day": all_day,
+                        }
+                    )
                 except Exception as e:
                     logger.warning(f"Error parsing event: {e}")
                     continue
@@ -651,9 +781,13 @@ class Home(BasePlugin):
             return parsed_events
 
         except requests.exceptions.Timeout:
-            raise RuntimeError("Calendar request timed out. Check your internet connection.")
+            raise RuntimeError(
+                "Calendar request timed out. Check your internet connection."
+            )
         except requests.exceptions.ConnectionError:
-            raise RuntimeError("Cannot connect to calendar URL. Check your internet connection.")
+            raise RuntimeError(
+                "Cannot connect to calendar URL. Check your internet connection."
+            )
         except RuntimeError:
             # Re-raise our custom RuntimeErrors
             raise
@@ -661,8 +795,8 @@ class Home(BasePlugin):
             logger.error(f"Failed to fetch calendar: {str(e)}")
             raise RuntimeError(f"Calendar fetch error: {str(e)}")
 
-    def filter_day_events(self, events, tz, target_date):
-        """Filter events for a specific day"""
+    def filter_day_events(self, events, tz, target_date, time_format="12h"):
+        """Filter events that intersect target day; clip intervals to that day."""
         if isinstance(target_date, datetime):
             day_start = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
         else:
@@ -672,21 +806,39 @@ class Home(BasePlugin):
 
         day_events = []
         for event in events:
-            event_dt = event["datetime"]
-            if day_start <= event_dt < day_end:
-                if event["all_day"]:
-                    time_str = "All Day"
-                else:
-                    time_str = event_dt.strftime("%I:%M %p").lstrip("0")
+            start = event["datetime"]
+            end = event.get("end_datetime", start + DEFAULT_TIMED_DURATION)
+            clipped = clip_interval_to_day(start, end, day_start, day_end)
+            if clipped is None:
+                continue
+            clip_start, clip_end = clipped
 
-                day_events.append({
-                    "time": time_str,
-                    "title": event["title"],
-                    "all_day": event["all_day"],
-                    "color": event.get("color", "#4285f4")
-                })
+            if event["all_day"]:
+                day_events.append(
+                    {
+                        "sort_dt": clip_start,
+                        "title": event["title"],
+                        "all_day": True,
+                        "color": event.get("color", "#4285f4"),
+                        "time": "All day",
+                    }
+                )
+            else:
+                day_events.append(
+                    {
+                        "sort_dt": clip_start,
+                        "clip_start": clip_start,
+                        "clip_end": clip_end,
+                        "title": event["title"],
+                        "all_day": False,
+                        "color": event.get("color", "#4285f4"),
+                        "time_range": format_time_range(
+                            clip_start, clip_end, time_format, False
+                        ),
+                    }
+                )
 
-        day_events.sort(key=lambda x: (not x["all_day"], x["time"]))
+        day_events = sort_calendar_agenda_rows(day_events)
 
         return day_events
 

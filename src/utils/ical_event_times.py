@@ -171,6 +171,8 @@ def layout_timeline_blocks(
         it["col_count"] = col_count
         it["width_pct"] = round(width_pct, 4)
         it["left_pct"] = round(it["col"] * width_pct, 4)
+        dur_s = (it["_vis_end"] - it["_vis_start"]).total_seconds()
+        it["is_short"] = dur_s <= 1800
         it.pop("_vis_start", None)
         it.pop("_vis_end", None)
 

@@ -115,9 +115,16 @@
         .track-inner {
             position: absolute;
             inset: 0;
+            overflow: hidden;
+        }
+        .ev-slot {
+            position: absolute;
+            box-sizing: border-box;
+            padding: 2px 1px;
         }
         .ev-block {
-            position: absolute;
+            height: 100%;
+            width: 100%;
             box-sizing: border-box;
             padding: 0.4vh 0.6vw;
             border-radius: 3px;
@@ -142,6 +149,26 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+        }
+        .ev-block.ev-short {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1vw;
+            padding: 0 0.6vw;
+        }
+        .ev-short .ev-range {
+            flex-shrink: 0;
+            margin-bottom: 0;
+            white-space: nowrap;
+        }
+        .ev-short .ev-title {
+            flex: 1;
+            min-width: 0;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .empty {
             flex: 1;
@@ -186,13 +213,16 @@
                     <div class="hour-tick" style="top: {{ tick.top_pct }}%;">{{ tick.label }}</div>
                     {% endfor %}
                 </div>
-                <div class="track" style="background-image: repeating-linear-gradient(to bottom, #dedede 0, #dedede 1px, transparent 1px, transparent calc(100% / {{ hour_slot_count }}));">
+                <div class="track">
                     <div class="track-inner">
                         {% for ev in timeline_blocks %}
-                        <div class="ev-block"
-                             style="top: {{ ev.top_pct }}%; height: {{ ev.height_pct }}%; left: {{ ev.left_pct }}%; width: {{ ev.width_pct }}%; border-left-color: {{ ev.color }};">
-                            <div class="ev-range">{{ ev.time_range }}</div>
-                            <div class="ev-title">{{ ev.title }}</div>
+                        <div class="ev-slot"
+                             style="top: {{ ev.top_pct }}%; height: {{ ev.height_pct }}%; left: {{ ev.left_pct }}%; width: {{ ev.width_pct }}%;">
+                            <div class="ev-block{% if ev.is_short %} ev-short{% endif %}"
+                                 style="border-left-color: {{ ev.color }};">
+                                <div class="ev-range">{{ ev.time_range }}</div>
+                                <div class="ev-title">{{ ev.title }}</div>
+                            </div>
                         </div>
                         {% endfor %}
                     </div>

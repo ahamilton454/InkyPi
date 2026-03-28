@@ -390,9 +390,7 @@ class Home(BasePlugin):
         show_all_day_heading = len(timed_raw) > 0 and len(all_day_events) > 0
 
         if isinstance(target_date, datetime):
-            day_start = target_date.replace(
-                hour=0, minute=0, second=0, microsecond=0
-            )
+            day_start = target_date.replace(hour=0, minute=0, second=0, microsecond=0)
         else:
             day_start = datetime.combine(target_date, datetime.min.time())
             day_start = tz.localize(day_start)
@@ -468,14 +466,28 @@ class Home(BasePlugin):
                     "Today's APOD is a video, not an image. Try enabling 'Randomize' in settings."
                 )
 
-            image_url = data.get("hdurl") or data.get("url")
+            # Prefer standard URL over HD: same visual quality at dashboard size, much lower
+            # peak memory when decoding (HD JPEGs can exceed small cgroup limits, e.g. systemd MemoryMax).
+            image_url = data.get("url") or data.get("hdurl")
+            if not image_url:
+                raise RuntimeError("NASA APOD response missing image URL.")
 
+            logger.info("NASA APOD: downloading image...")
             img_response = requests.get(image_url, timeout=15)
             img_response.raise_for_status()
+            nbytes = len(img_response.content)
+            logger.info("NASA APOD: downloaded %s bytes, decoding...", f"{nbytes:,}")
+
             image = Image.open(BytesIO(img_response.content))
+            logger.info(
+                "NASA APOD: decoded %sx%s, resizing...",
+                image.width,
+                image.height,
+            )
 
             # Resize to fit dimensions while maintaining aspect ratio
             image = self.resize_and_crop(image, dimensions)
+            logger.info("NASA APOD: compositing gradient overlay...")
 
             # Add subtle gradient overlay at top and bottom edges
             image = image.convert("RGBA")

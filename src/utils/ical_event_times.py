@@ -94,9 +94,7 @@ def timeline_window_for_day(
     base_start = day_start.replace(
         hour=fixed_start_hour, minute=0, second=0, microsecond=0
     )
-    base_end = day_start.replace(
-        hour=fixed_end_hour, minute=0, second=0, microsecond=0
-    )
+    base_end = day_start.replace(hour=fixed_end_hour, minute=0, second=0, microsecond=0)
     if not clipped_timed:
         return base_start, base_end
     earliest = min(r["clip_start"] for r in clipped_timed)
@@ -179,9 +177,7 @@ def layout_timeline_blocks(
     return items
 
 
-def hour_ticks(
-    window_start: datetime, window_end: datetime, time_format: str
-) -> list:
+def hour_ticks(window_start: datetime, window_end: datetime, time_format: str) -> list:
     """Return list of {label, top_pct} for full-hour marks within the window."""
     total_s = (window_end - window_start).total_seconds()
     if total_s <= 0:

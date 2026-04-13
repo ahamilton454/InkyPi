@@ -83,7 +83,7 @@ To install InkyPi, follow these steps:
 After installation completes, the script prompts for a reboot. After reboot, the display updates to show the InkyPi splash screen.
 
 Note: 
-- The installation script requires sudo privileges to install and run the service. We recommend starting with a fresh installation of Raspberry Pi OS to avoid potential conflicts with existing software or configurations.
+- The installation script requires sudo privileges to install and run the service. A fresh installation of Raspberry Pi OS is recommended to avoid potential conflicts with existing software or configurations.
 - The installation process will automatically enable the required SPI and I2C interfaces on your Raspberry Pi.
 
 For more details, including instructions on how to image your microSD with Raspberry Pi OS, refer to [installation.md](./docs/installation.md). You can also checkout [this YouTube tutorial](https://youtu.be/L5PvQj1vfC4).
@@ -141,7 +141,9 @@ This project includes fonts and icons with separate licensing and attribution re
 
 Check out the [troubleshooting guide](./docs/troubleshooting.md). If you're still having trouble, feel free to create an issue on the [GitHub Issues](https://github.com/fatihak/InkyPi/issues) page.
 
-If using a Pi Zero W, note that there are known issues during the installation process. See [Known Issues during Pi Zero W Installation](./docs/troubleshooting.md#known-issues-during-pi-zero-w-installation) in the troubleshooting guide for additional details.
+See the [troubleshooting guide](./docs/troubleshooting.md) for common issues and remediation steps. For unresolved issues, create a GitHub issue: [GitHub Issues](https://github.com/fatihak/InkyPi/issues).
+
+Pi Zero W installations have known issues. See [Known Issues during Pi Zero W Installation](./docs/troubleshooting.md#known-issues-during-pi-zero-w-installation).
 
 ## Image padding background color
 

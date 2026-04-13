@@ -81,13 +81,14 @@ Install InkyPi as follows:
     ```
 
 
-After the installation is complete, the script will prompt you to reboot your Raspberry Pi. Once rebooted, the display will update to show the InkyPi splash screen.
+After installation completes, the script prompts for a reboot. After the reboot, the display updates to show the InkyPi splash screen.
 
 Note:
-- The installation script requires sudo privileges to install and run the service. We recommend starting with a fresh installation of Raspberry Pi OS to avoid potential conflicts with existing software or configurations.
-- The installation process will automatically enable the required SPI and I2C interfaces on your Raspberry Pi.
+- The installation script requires sudo privileges to install and run the service.
+- A fresh installation of Raspberry Pi OS is recommended to avoid conflicts with existing software or configuration.
+- The installation process automatically enables the required SPI and I2C interfaces.
 
-For more details, including instructions on how to image your microSD with Raspberry Pi OS, refer to [installation.md](./docs/installation.md). You can also checkout [this YouTube tutorial](https://youtu.be/L5PvQj1vfC4).
+For more details, including instructions for imaging a microSD card with Raspberry Pi OS, refer to [installation.md](./docs/installation.md). See also [the YouTube tutorial](https://youtu.be/L5PvQj1vfC4).
 
 ## Update
 Update InkyPi as follows:

@@ -1,29 +1,30 @@
 # InkyPi 
+A calm, joyful E-Ink display project for your favorite everyday information.
 
 <img src="./docs/images/inky_clock.jpg" />
 
 
 ## About InkyPi 
-InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it allows you to effortlessly display the content you care about, with a simple web interface that makes setup and configuration effortless.
+InkyPi is a friendly, open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it lets you effortlessly showcase the content you care about through a simple web interface that makes setup and configuration feel smooth and enjoyable.
 
-**Features**:
-- Natural paper-like aethetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight
-- Web Interface allows you to update and configure the display from any device on your network
-- Minimize distractions: no LEDS, noise, or notifications, just the content you care about
-- Easy installation and configuration, perfect for beginners and makers alike
-- Open source project allowing you to modify, customize, and create your own plugins
-- Set up scheduled playlists to display different plugins at designated times
+**Features you'll love**:
+- Relaxing, natural paper-like aesthetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight
+- Friendly web interface that lets you update and configure the display from any device on your network
+- Minimize distractions: no LEDs, noise, or notifications — just the content you care about
+- Easy installation and configuration, perfect for curious beginners and experienced makers alike
+- Open-source project that welcomes you to modify, customize, and create your own plugins
+- Set up scheduled playlists so your favorite plugins appear at just the right time
 
-**Plugins**:
+**Plugins at a glance**:
 
-- Image Upload: Upload and display any image from your browser
-- Daily Newspaper/Comic: Show daily comics and front pages of major newspapers from around the world
-- Clock: Customizable clock faces for displaying time
-- AI Image/Text: Generate images and dynamic text from prompts using OpenAI's models
-- Weather: Display current weather conditions and multi-day forecasts with a customizable layout
-- Calendar: Visualize your calendar from Google, Outlook, or Apple Calendar with customizable layouts
+- Image Upload: Quickly upload and display any image from your browser
+- Daily Newspaper/Comic: Enjoy daily comics and front pages of major newspapers from around the world
+- Clock: Customizable clock faces for displaying time in a style that fits your space
+- AI Image/Text: Generate playful images and dynamic text from prompts using OpenAI's models
+- Weather: Display current weather conditions and multi-day forecasts with a clean, customizable layout
+- Calendar: Visualize your calendar from Google, Outlook, or Apple Calendar with calm, glanceable layouts
 
-And additional plugins coming soon! For documentation on building custom plugins, see [Building InkyPi Plugins](./docs/building_plugins.md).
+And additional plugins are always on the way! For documentation on building custom plugins, see [Building InkyPi Plugins](./docs/building_plugins.md).
 
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
@@ -78,7 +79,7 @@ To install InkyPi, follow these steps:
     ```
 
 
-After the installation is complete, the script will prompt you to reboot your Raspberry Pi. Once rebooted, the display will update to show the InkyPi splash screen.
+After the installation is complete, the script will prompt you to reboot your Raspberry Pi. Once rebooted, the display will update to show the InkyPi splash screen and you can start enjoying your new E-Ink dashboard.
 
 Note: 
 - The installation script requires sudo privileges to install and run the service. We recommend starting with a fresh installation of Raspberry Pi OS to avoid potential conflicts with existing software or configurations.
@@ -103,14 +104,14 @@ To update your InkyPi with the latest code changes, follow these steps:
 This process ensures that any new updates, including code changes and additional dependencies, are properly applied without requiring a full reinstallation.
 
 ## Uninstall
-To install InkyPi, simply run the following command:
+To uninstall InkyPi, simply run the following command when you're ready to remove it:
 
 ```bash
 sudo bash install/uninstall.sh
 ```
 
-## Roadmap
-The InkyPi project is constantly evolving, with many exciting features and improvements planned for the future.
+## Roadmap & Future Ideas
+The InkyPi project is constantly evolving, with many exciting features and improvements planned to make your display even more delightful.
 
 - Plugins, plugins, plugins
 - Modular layouts to mix and match plugins
@@ -138,10 +139,10 @@ This project includes fonts and icons with separate licensing and attribution re
 Check out the [troubleshooting guide](./docs/troubleshooting.md). If you're still having trouble, feel free to create an issue on the [GitHub Issues](https://github.com/fatihak/InkyPi/issues) page.
 
 If you're using a Pi Zero W, note that there are known issues during the installation process. See [Known Issues during Pi Zero W Installation](./docs/troubleshooting.md#known-issues-during-pi-zero-w-installation) section in the troubleshooting guide for additional details..
+If you're using a Pi Zero W, be aware that there are a few known issues during the installation process. See the [Known Issues during Pi Zero W Installation](./docs/troubleshooting.md#known-issues-during-pi-zero-w-installation) section in the troubleshooting guide for additional details.
+## Sponsoring & Support
 
-## Sponsoring
-
-InkyPi is maintained and developed with the help of sponsors. If you enjoy the project or find it useful, consider supporting its continued development.
+InkyPi is maintained and developed with the generous help of sponsors. If you enjoy the project or find it useful, consider supporting its continued development so it can keep growing and improving.
 
 <p align="center">
 <a href="https://github.com/sponsors/fatihak" target="_blank"><img src="https://user-images.githubusercontent.com/345274/133218454-014a4101-b36a-48c6-a1f6-342881974938.png" alt="Become a Patreon" height="35" width="auto"></a>
@@ -150,7 +151,7 @@ InkyPi is maintained and developed with the help of sponsors. If you enjoy the p
 </p>
 
 
-## Acknowledgements
+Check out these similar, inspiring projects:
 
 Check out these similar projects:
 
@@ -159,3 +160,4 @@ Check out these similar projects:
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency
+Thanks for being part of the InkyPi community and helping the project grow!

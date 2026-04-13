@@ -29,7 +29,7 @@ For documentation on building custom plugins, see [Building InkyPi Plugins](./do
 
 See [the wiki](https://github.com/fatihak/InkyPi/wiki) for a list of community-maintained third-party plugins.
 
-## Hardware 
+## Hardware
 - Raspberry Pi (4 | 3 | Zero 2 W)
     - Recommended to get 40 pin Pre Soldered Header
 - MicroSD Card (min 8 GB) like [this one](https://amzn.to/3G3Tq9W)
@@ -120,7 +120,7 @@ The InkyPi project is constantly evolving, with many exciting features and impro
 - Support for buttons with customizable action bindings
 - Improved Web UI on mobile devices
 
-Check out the public [trello board](https://trello.com/b/SWJYWqe4/inkypi) to explore upcoming features and vote on what you'd like to see next!
+Check out the public [trello board](https://trello.com/b/SWJYWqe4/inkypi) to explore upcoming features and vote on priorities.
 
 ## Waveshare Display Support
 
@@ -144,7 +144,7 @@ If a Pi Zero W is in use, note that known issues exist during installation. See 
 
 ## Sponsoring
 
-InkyPi is maintained and developed with the help of sponsors. If you enjoy the project or find it useful, consider supporting its continued development.
+InkyPi is maintained and developed with the help of sponsors. Sponsorship helps support ongoing development.
 
 <p align="center">
 <a href="https://github.com/sponsors/fatihak" target="_blank"><img src="https://user-images.githubusercontent.com/345274/133218454-014a4101-b36a-48c6-a1f6-342881974938.png" alt="Become a Patreon" height="35" width="auto"></a>
@@ -158,7 +158,7 @@ InkyPi is maintained and developed with the help of sponsors. If you enjoy the p
 Check out these similar projects:
 
 - [PaperPi](https://github.com/txoof/PaperPi) - awesome project that supports waveshare devices
-    - shoutout to @txoof for assisting with InkyPi's installation process
+    - thanks to @txoof for assisting with InkyPi's installation process
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency

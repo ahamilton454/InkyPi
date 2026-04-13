@@ -81,8 +81,8 @@ Install InkyPi as follows:
 After installation completes, the script prompts for a reboot. After reboot, the display updates to show the InkyPi splash screen.
 
 Note: 
-- The installation script requires sudo privileges to install and run the service. We recommend starting with a fresh installation of Raspberry Pi OS to avoid potential conflicts with existing software or configurations.
-- The installation process will automatically enable the required SPI and I2C interfaces on your Raspberry Pi.
+- The installation script requires sudo privileges to install and run the service. Starting with a fresh installation of Raspberry Pi OS helps avoid potential conflicts with existing software or configurations.
+- The installation process automatically enables the required SPI and I2C interfaces.
 
 For more details, including instructions on imaging a microSD with Raspberry Pi OS, refer to [installation.md](./docs/installation.md). A video walkthrough is also available: [YouTube tutorial](https://youtu.be/L5PvQj1vfC4).
 
@@ -118,6 +118,7 @@ The InkyPi project includes planned feature and usability improvements.
 - Improved Web UI on mobile devices
 
 Check out the public [trello board](https://trello.com/b/SWJYWqe4/inkypi) to explore upcoming features and vote on what you'd like to see next!
+Check out the public [trello board](https://trello.com/b/SWJYWqe4/inkypi) to explore upcoming features and vote on priorities.
 
 ## Waveshare Display Support
 
@@ -137,7 +138,7 @@ This project includes fonts and icons with separate licensing and attribution re
 
 Check out the [troubleshooting guide](./docs/troubleshooting.md). If issues persist, create an issue on the [GitHub Issues](https://github.com/fatihak/InkyPi/issues) page.
 
-If using a Pi Zero W, note the known issues during installation. See [Known Issues during Pi Zero W Installation](./docs/troubleshooting.md#known-issues-during-pi-zero-w-installation) in the troubleshooting guide for additional details.
+Pi Zero W installations have known issues. See [Known Issues during Pi Zero W Installation](./docs/troubleshooting.md#known-issues-during-pi-zero-w-installation) in the troubleshooting guide for additional details.
 
 ## Sponsoring
 

@@ -8,7 +8,7 @@ InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. 
 
 **Features**:
 - Natural, paper-like aesthetic: crisp, minimalist visuals without glare or backlight
-- Web Interface allows you to update and configure the display from any device on your network
+- Web interface: update and configure the display from any device on the network
 - Minimize distractions: no LEDs, noise, or notifications
 - Easy installation and configuration, perfect for beginners and makers alike
 - Open source project allowing you to modify, customize, and create your own plugins
@@ -125,7 +125,7 @@ Waveshare offers a range of e-Paper displays, similar to the Inky screens from P
 
 This project has been tested with several Waveshare models. **Displays based on the IT8951 controller are not supported**, and **screens smaller than 4 inches are not recommended** due to limited resolution.
 
-If your display model has a corresponding driver in the link above, it’s likely to be compatible. When running the installation script, use the -W option to specify your display model (without the .py extension). The script will automatically fetch and install the correct driver.
+If a display model has a corresponding driver in the link above, it is likely to be compatible. When running the installation script, use the `-W` option to specify the display model (without the `.py` extension). The script automatically fetches and installs the correct driver.
 
 ## License
 
@@ -141,7 +141,7 @@ If using a Pi Zero W, note the known issues during installation. See [Known Issu
 
 ## Sponsoring
 
-InkyPi is maintained and developed with the help of sponsors. If you enjoy the project or find it useful, consider supporting its continued development.
+InkyPi is maintained and developed with the help of sponsors. Support for ongoing development is available via the links below.
 
 <p align="center">
 <a href="https://github.com/sponsors/fatihak" target="_blank"><img src="https://user-images.githubusercontent.com/345274/133218454-014a4101-b36a-48c6-a1f6-342881974938.png" alt="Become a Patreon" height="35" width="auto"></a>
@@ -154,8 +154,8 @@ InkyPi is maintained and developed with the help of sponsors. If you enjoy the p
 
 Check out these similar projects:
 
-- [PaperPi](https://github.com/txoof/PaperPi) - awesome project that supports waveshare devices
-    - shoutout to @txoof for assisting with InkyPi's installation process
+- [PaperPi](https://github.com/txoof/PaperPi) - project that supports Waveshare devices
+    - thanks to @txoof for assisting with InkyPi's installation process
 - [InkyCal](https://github.com/aceinnolab/Inkycal) - has modular plugins for building custom dashboards
 - [PiInk](https://github.com/tlstommy/PiInk) - inspiration behind InkyPi's flask web ui
 - [rpi_weather_display](https://github.com/sjnims/rpi_weather_display) - alternative eink weather dashboard with advanced power efficiency

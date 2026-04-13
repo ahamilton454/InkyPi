@@ -4,14 +4,14 @@
 
 
 ## About InkyPi 
-InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. It focuses on simple setup and flexible customization, with a web interface for configuration and content updates.
+InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. It provides a straightforward setup experience and flexible customization, with a web interface for configuration and content updates.
 
 **Features**:
 - Natural, paper-like aesthetic: crisp, minimalist visuals without glare or backlight
 - Web interface: update and configure the display from any device on the network
 - Minimize distractions: no LEDs, noise, or notifications
-- Easy installation and configuration, perfect for beginners and makers alike
-- Open source project allowing you to modify, customize, and create your own plugins
+- Simple installation and configuration
+- Open-source design that supports custom plugins and extensions
 - Set up scheduled playlists to display different plugins at designated times
 
 **Plugins**:
@@ -118,7 +118,6 @@ The InkyPi project includes planned feature and usability improvements.
 - Improved Web UI on mobile devices
 
 Check out the public [trello board](https://trello.com/b/SWJYWqe4/inkypi) to explore upcoming features and vote on what you'd like to see next!
-Check out the public [trello board](https://trello.com/b/SWJYWqe4/inkypi) to explore upcoming features and vote on priorities.
 
 ## Waveshare Display Support
 

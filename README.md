@@ -1,15 +1,15 @@
-# InkyPi 
+# InkyPi
 
 <img src="./docs/images/inky_clock.jpg" />
 
 
-## About InkyPi 
+## About InkyPi
 InkyPi is an open-source, customizable E-Ink display powered by a Raspberry Pi. Designed for simplicity and flexibility, it allows you to effortlessly display the content you care about, with a simple web interface that makes setup and configuration effortless.
 
 **Features**:
-- Natural paper-like aethetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight
-- Web Interface allows you to update and configure the display from any device on your network
-- Minimize distractions: no LEDS, noise, or notifications, just the content you care about
+- Natural paper-like aesthetic: crisp, minimalist visuals that are easy on the eyes, with no glare or backlight
+- Web interface for updating and configuring the display from any device on the network
+- Minimize distractions: no LEDs, noise, or notifications—only the content that matters
 - Easy installation and configuration, perfect for beginners and makers alike
 - Open source project allowing you to modify, customize, and create your own plugins
 - Set up scheduled playlists to display different plugins at designated times
@@ -86,6 +86,9 @@ Note:
 
 For more details, including instructions on how to image your microSD with Raspberry Pi OS, refer to [installation.md](./docs/installation.md). You can also checkout [this YouTube tutorial](https://youtu.be/L5PvQj1vfC4).
 
+## Development (no hardware required)
+InkyPi supports local development without Raspberry Pi hardware by running in developer mode (`--dev`). See [development.md](./docs/development.md) for setup steps and essential commands.
+
 ## Update
 To update your InkyPi with the latest code changes, follow these steps:
 1. Navigate to the project directory:
@@ -103,7 +106,7 @@ To update your InkyPi with the latest code changes, follow these steps:
 This process ensures that any new updates, including code changes and additional dependencies, are properly applied without requiring a full reinstallation.
 
 ## Uninstall
-To install InkyPi, simply run the following command:
+To uninstall InkyPi, run the following command:
 
 ```bash
 sudo bash install/uninstall.sh

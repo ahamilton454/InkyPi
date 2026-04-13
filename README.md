@@ -78,7 +78,7 @@ To install InkyPi, follow these steps:
     ```
 
 
-After the installation is complete, the script will prompt you to reboot your Raspberry Pi. Once rebooted, the display will update to show the InkyPi splash screen.
+After the installation is complete, the script prompts for a reboot. After reboot, the display updates to show the InkyPi splash screen.
 
 Note: 
 - The installation script requires sudo privileges to install and run the service. We recommend starting with a fresh installation of Raspberry Pi OS to avoid potential conflicts with existing software or configurations.
@@ -100,7 +100,7 @@ To update your InkyPi with the latest code changes, follow these steps:
     ```bash
     sudo bash install/update.sh
     ```
-This process ensures that any new updates, including code changes and additional dependencies, are properly applied without requiring a full reinstallation.
+This process applies code updates and any required dependencies without requiring a full reinstallation.
 
 ## Uninstall
 To uninstall InkyPi, run the following command:

@@ -2,4 +2,4 @@
 
 ## 2026-04-24
 
-* Improved repository front page title presentation by correcting the README project heading to `# InkyPi!`.
+* Refined repository front page title presentation by correcting the README project heading to `# InkyPi!`.

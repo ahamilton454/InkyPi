@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timestamp</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            color: #222;
+            background: #f8f8f8;
+            overflow: hidden;
+            width: {{ width }}px;
+            height: {{ height }}px;
+            padding: 0 4vw;
+        }
+        .container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            border-top: 2px solid #999;
+        }
+        .timestamp {
+            font-size: 3.2vw;
+            font-weight: 600;
+            color: #444;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span class="timestamp">Updated {{ time_str }}</span>
+    </div>
+</body>
+</html>

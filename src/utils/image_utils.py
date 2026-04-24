@@ -108,6 +108,13 @@ def take_screenshot_html(html_str, dimensions, timeout_ms=None):
 
 def _find_chromium_binary():
     """Find the first available Chromium-based binary in system PATH."""
+    # Check common macOS Chrome installation path first
+    mac_chrome_path = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    if os.path.exists(mac_chrome_path):
+        logger.debug(f"Found browser binary: Google Chrome at {mac_chrome_path}")
+        return mac_chrome_path
+
+    # Check system PATH
     candidates = ["chromium-headless-shell", "chromium", "chrome"]
     for candidate in candidates:
         path = shutil.which(candidate)
@@ -149,7 +156,8 @@ def take_screenshot(target, dimensions, timeout_ms=None):
             "--mute-audio",
             "--renderer-process-limit=1",
             "--no-zygote",
-            "--no-sandbox"
+            "--no-sandbox",
+            "--force-device-scale-factor=1"
         ]
         if timeout_ms:
             command.append(f"--timeout={timeout_ms}")
